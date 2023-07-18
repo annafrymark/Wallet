@@ -1,0 +1,37 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #ffffff;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.imgwallet {
+  margin-right: 18px;
+}
+.buttonContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+.border {
+  color: #bdbdbd;
+  margin-top: 19px;
+  font-size: 26px;
+}
+.button {
+  background-color: #ffffff;
+  color: #bdbdbd;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+.imgexit {
+  margin-right: 5px;
+}
