@@ -1,21 +1,25 @@
 import { NavLink } from 'react-router-dom';
+import styles from './Navigation.module.css';
 
-// TODO: function to select if active
 // TODO: check routes
-// TODO: add styles & icons
+// TODO: add styles & icons, check if activeLink/notActiveLink is working
+
+const isActive = ({ isActive }) => {
+  return isActive ? styles.activeLink : styles.notActiveLink;
+};
 
 const Navigation = () => {
   return (
     <>
       <div className="container">
         <nav className="navigation">
-          <NavLink to="/homepage" className={active}>
-            <p className="link_name">homepage</p>
+          <NavLink to="/home" className={isActive}>
+            <p className="link_name">Homepage</p>
           </NavLink>
-          <NavLink to="/statistics" className={notActive}>
+          <NavLink to="/statistics" className={isActive}>
             <p className="link_name">Statistics</p>
           </NavLink>
-          <NavLink to="/currencies" className={notActive}>
+          <NavLink to="/currencies" className={isActive}>
             <p className="link_name">Currencies</p>
           </NavLink>
         </nav>
