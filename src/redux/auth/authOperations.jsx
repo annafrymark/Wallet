@@ -20,7 +20,7 @@ const register = createAsyncThunk('auth/register', async (credentials, thunkAPI)
         setAuthHeader(response.data.token);
         Notiflix.Notify.success('Registration successful. Please check your email to verify your account.', {
             position: 'center-top',
-            closeButton: true,
+            closeButton: false,
             timeout: 2000,
             width: '350px',
         });
@@ -28,7 +28,7 @@ const register = createAsyncThunk('auth/register', async (credentials, thunkAPI)
     } catch (error) { 
         Notiflix.Notify.failure(`${error.message}`, {
             position: 'center-top',
-            closeButton: true,
+            closeButton: false,
             timeout: 2000,
             width: '350px',
         });
@@ -57,7 +57,7 @@ const refreshUser = createAsyncThunk('users/refresh', async (_, thunkAPI) => {
     } catch (error) { 
         Notiflix.Notify.failure(`${error.message}`, {
             position: 'center-top',
-            closeButton: true,
+            closeButton: false,
             timeout: 2000,
             width: '350px',
         });
