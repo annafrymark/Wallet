@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
@@ -9,7 +9,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'; 
-import logo from '../../utilities/images/wallet-icon@2x.png';
+import logo from '../../utilities/images/wallet-icon.png';
 import css from './registrationForm.module.css';
 import { register } from 'redux/auth/authOperations';
 import PasswordStrengthBar from './PasswordStrenghtBar';
@@ -32,196 +32,189 @@ export const RegisterForm = () => {
             
     const handlePasswordVisibility = () => {
         setShowPassword(!showPassword);
+        console.log('setshow');
     };
     
     const handleConfirmPasswordVisibility = () => {
         setShowConfirmPassword(!showConfirmPassword);
+        console.log('setconfirm');
     };
 
-    const handleSubmit = ({ email, password, confirmPassword, name }) => {
-        // event.preventDefault();
+    const handleSubmit = (event) => {
+        event.preventDefault();
 
-        // const form = event.currentTarget;
-        // const email = form.elements.email.value;
-        // const password = form.elements.password.value;
-        // const confirmPassword = form.elements.confirmPassword.value;
-        // const name = form.elements.name.value;
+        const form = event.currentTarget;
+        const email = form.elements.email.value;
+        const password = form.elements.password.value;
+        const confirmPassword = form.elements.confirmPassword.value;
+        const name = form.elements.name.value;
 
         dispatch(register({ email, password, confirmPassword, name, }));
+        console.log('cos cos cos');
         console.log(email, password, confirmPassword, name);
         navigate('/login');
-        // form.reset();
+        form.reset();
     };
 
     return (
         <Formik
             initialValues={{ email: '', password: '', confirmPassword: '', name: '', }}
-            onSubmit={handleSubmit}
             validationSchema={userSchema}
             validateOnBlur>{
-                ({ values, handleChange, handleBlur, isValid, touched, dirty, errors }) => (
+                ({ values, handleBlur, isValid, touched, dirty, errors }) => (
                 <div className={css.Container}>
-                <form className={css.Form}>
+                <Form className={css.Form} onSubmit={(event)=>handleSubmit(event)}>
                     <div className={css.LogoContainer}>
                     <img className={css.Logo} alt="Logo" src={logo} />
                     <h1 className={css.Title}>Wallet</h1>
                     </div>
-                    <div className={css.Field}>
-                    {touched.email && errors.email ? (
-                        <p
-                        style={{
-                            color: '#ff6596',
-                            position: 'absolute',
-                            bottom: '-30px',
-                            left: '0',
-                            fontFamily: 'Poppins',
-                            fontSize: '13px',
-                        }}
-                        >
-                        {errors.email}
-                        </p>
-                    ) : null}
+                    <label className={css.Field}>
+                        {touched.email && errors.email ? (
+                            <p
+                            style={{
+                                color: '#ff6596',
+                                position: 'absolute',
+                                bottom: '-30px',
+                                left: '0',
+                                fontFamily: 'Poppins',
+                                fontSize: '13px',
+                            }}
+                            >
+                            {errors.email}
+                            </p>
+                        ) : null}
 
-                    <EmailIcon
-                        className={css.InputIcon}
-                        style={{ color: '#e0e0e0' }}
-                    />
-                    <input
-                        className={css.Input}
-                        type="text"
-                        name="email"
-                        id="email"
-                        placeholder="E-mail"
-                        value={values.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        autoComplete='off'
-                    />
-                    </div>
-                    <div className={css.Field}>
-                    {touched.password && errors.password ? (
-                        <p
-                        style={{
-                            color: '#ff6596',
-                            position: 'absolute',
-                            bottom: '-30px',
-                            left: '0',
-                            fontFamily: 'Poppins',
-                            fontSize: '13px',
-                        }}
-                        >
-                        {errors.password}
-                        </p>
-                    ) : null}
+                        <EmailIcon
+                            className={css.InputIcon}
+                            style={{ color: '#e0e0e0' }}
+                        />
+                        <Field
+                            className={css.Input}
+                            type="text"
+                            name="email"
+                            id="email"
+                            placeholder="E-mail"
+                            value={values.email}
+                            onBlur={handleBlur}
+                            autoComplete='off'
+                        />
+                    </label>
+                    <label className={css.Field}>
+                        {touched.password && errors.password ? (
+                            <p
+                            style={{
+                                color: '#ff6596',
+                                position: 'absolute',
+                                bottom: '-30px',
+                                left: '0',
+                                fontFamily: 'Poppins',
+                                fontSize: '13px',
+                            }}
+                            >
+                            {errors.password}
+                            </p>
+                        ) : null}
 
-                    <LockIcon
-                        className={css.InputIcon}
-                        style={{ color: '#e0e0e0' }}
-                    />
-                    <input
-                        className={css.Input}
-                        type={showPassword ? 'text' : 'password'}
-                        name="password"
-                        placeholder="Password"
-                        id="password"
-                        value={values.password}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        autoComplete="new-password"
-                        onInput={e => setPassword(e.target.value)}
-                    />
-                    <span
-                        onClick={handlePasswordVisibility}
-                        className={css.PasswordVisibilityToggle}
-                    >
-                        {showPassword ? (
-                        <VisibilityOffIcon style={{ color: '#e0e0e0' }} />
-                        ) : (
-                        <VisibilityIcon style={{ color: '#e0e0e0' }} />
-                        )}
-                    </span>
-                    </div>
-                    <div className={css.Field}>
-                    {touched.confirmPassword && errors.confirmPassword ? (
-                        <p
-                        style={{
-                            color: '#ff6596',
-                            position: 'absolute',
-                            bottom: '-30px',
-                            left: '0',
-                            fontFamily: 'Poppins',
-                            fontSize: '13px',
-                        }}
-                        >
-                        {errors.confirmPassword}
-                        </p>
-                    ) : null}
-
-                    <LockIcon
-                        className={css.InputIcon}
-                        style={{ color: '#e0e0e0' }}
-                    />
-                    <input
-                        className={css.Input}
-                        type={showConfirmPassword ? 'text' : 'password'}
-                        name="confirmPassword"
-                        id="confirmPassword"
-                        placeholder="Confirm password"
-                        value={values.confirmPassword}
-                        onChange={handleChange}
-                        onBlur={handleBlur}                  
-                        autoComplete="new-password"
-                    />
+                        <LockIcon
+                            className={css.InputIcon}
+                            style={{ color: '#e0e0e0' }}
+                        />
+                        <Field
+                            className={css.Input}
+                            type={showPassword ? 'text' : 'password'}
+                            name="password"
+                            placeholder="Password"
+                            id="password"
+                            value={values.password}
+                            onBlur={handleBlur}
+                            autoComplete="new-password"
+                        />
                         <span
-                            onClick={handleConfirmPasswordVisibility}
+                            onClick={handlePasswordVisibility}
                             className={css.PasswordVisibilityToggle}
                         >
-                        {showConfirmPassword ? (
-                        <VisibilityOffIcon style={{ color: '#e0e0e0' }} />
-                        ) : (
-                        <VisibilityIcon style={{ color: '#e0e0e0' }} />
-                        )}
-                    </span>
-                    <PasswordStrengthBar password={password} />
-                    </div>
-                    <div className={css.Field}>
-                    {touched.name && errors.name ? (
-                        <p
-                        style={{
-                            color: '#ff6596',
-                            position: 'absolute',
-                            bottom: '-30px',
-                            left: '0',
-                            fontFamily: 'Poppins',
-                            fontSize: '13px',
-                        }}
-                        >
-                        {errors.name}
-                        </p>
-                    ) : null}
+                            {showPassword ? (
+                            <VisibilityOffIcon style={{ color: '#e0e0e0' }} />
+                            ) : (
+                            <VisibilityIcon style={{ color: '#e0e0e0' }} />
+                            )}
+                        </span>
+                    </label>
+                    <label className={css.Field}>
+                        {touched.confirmPassword && errors.confirmPassword ? (
+                            <p
+                            style={{
+                                color: '#ff6596',
+                                position: 'absolute',
+                                bottom: '-30px',
+                                left: '0',
+                                fontFamily: 'Poppins',
+                                fontSize: '13px',
+                            }}
+                            >
+                            {errors.confirmPassword}
+                            </p>
+                        ) : null}
 
-                    <AccountBoxIcon
-                        className={css.InputIcon}
-                        style={{ color: '#e0e0e0' }}
-                    />
-                    <input
-                        className={css.Input}
-                        type="text"
-                        name="name"
-                        id="name"
-                        placeholder="First name"
-                        value={values.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        autoComplete='off'
-                    />
-                    </div>
+                        <LockIcon
+                            className={css.InputIcon}
+                            style={{ color: '#e0e0e0' }}
+                        />
+                        <Field
+                            className={css.Input}
+                            type={showConfirmPassword ? 'text' : 'password'}
+                            name="confirmPassword"
+                            id="confirmPassword"
+                            placeholder="Confirm password"
+                            value={values.confirmPassword}
+                            onBlur={handleBlur}                  
+                            autoComplete="new-password"
+                        />
+                            <span
+                                onClick={handleConfirmPasswordVisibility}
+                                className={css.PasswordVisibilityToggle}
+                            >
+                            {showConfirmPassword ? (
+                            <VisibilityOffIcon style={{ color: '#e0e0e0' }} />
+                            ) : (
+                            <VisibilityIcon style={{ color: '#e0e0e0' }} />
+                            )}
+                        </span>
+                        <PasswordStrengthBar password={password} />
+                    </label>
+                    <label className={css.Field}>
+                        {touched.name && errors.name ? (
+                            <p
+                            style={{
+                                color: '#ff6596',
+                                position: 'absolute',
+                                bottom: '-30px',
+                                left: '0',
+                                fontFamily: 'Poppins',
+                                fontSize: '13px',
+                            }}
+                            >
+                            {errors.name}
+                            </p>
+                        ) : null}
+
+                        <AccountBoxIcon
+                            className={css.InputIcon}
+                            style={{ color: '#e0e0e0' }}
+                        />
+                        <Field
+                            className={css.Input}
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="First name"
+                            value={values.name}
+                            onBlur={handleBlur}
+                            autoComplete='off'
+                        />
+                    </label>
                     <div className={css.ButtonContainer}>
-                    <button
-                        type="submit"
-                        className={css.ButtonPrimary}
-                        disabled={!isValid && !dirty}
-                    >
+                    <button type="submit" className={css.ButtonPrimary}>
                         Register
                     </button>
 
@@ -231,7 +224,7 @@ export const RegisterForm = () => {
                         </button>
                     </Link>
                     </div>
-                </form>
+                </Form>
                 </div>
             )}
         </Formik>
