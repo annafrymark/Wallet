@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import css from './ModalAddTransaction.module.css';
 import { ReactComponent as Plus } from '../images/plus.svg';
+import { ReactComponent as Close } from '../images/close.svg';
 import Header from 'components/shared/Header';
 import { Formik, Form, FastField } from 'formik';
 import DateTimePicker from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
+import Switch from '@mui/material/Switch';
 
 const initialValuesInCome = {
   price: '',
@@ -57,7 +59,7 @@ function FormIncome() {
               onChange={date => setFieldValue(`selectedDate`, date)}
               value={values.selectedDate}
             />
-            <lavel htmlFor="comment">Comment:</lavel>
+            <label htmlFor="comment">Comment:</label>
             <FastField
               as="textarea"
               placeholder="Comment"
@@ -103,7 +105,7 @@ function FormExpense() {
               onChange={date => setFieldValue(`selectedDate`, date)}
               value={values.selectedDate}
             />
-            <lavel htmlFor="comment">Comment:</lavel>
+            <label htmlFor="comment">Comment:</label>
             <FastField
               as="textarea"
               placeholder="Comment"
@@ -125,6 +127,7 @@ const Modal = () => {
   const [showModal, setShowModal] = useState(false);
   const [showIncomeForm, setShowIncomeForm] = useState(true);
 
+  const label = { inputProps: { 'aria-label': 'Switch demo' } };
   const toggleForm = () => {
     setShowIncomeForm(prevShowIncomeFrom => !prevShowIncomeFrom);
   };
@@ -147,15 +150,15 @@ const Modal = () => {
         <div className={css.modalcontainer}>
           <div className={css.modalcontent}>
             <span className={css.closebutton} onClick={handleCloseModal}>
-              &times;
+              <Close />
             </span>
             <span className={css.headernone}>
               <Header />
             </span>
             <h2>Add transction</h2>
-            <button onClick={toggleForm}>
+            <Switch {...label} defaultChecked onClick={toggleForm}>
               {showIncomeForm ? 'Income' : 'Expense'}
-            </button>
+            </Switch>
             {showIncomeForm ? <FormIncome /> : <FormExpense />}
           </div>
         </div>
