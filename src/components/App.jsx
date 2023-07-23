@@ -7,7 +7,7 @@ import { refreshUser } from "redux/auth/authOperations";
 import { RestrictedRoute } from "./Routes/RestrictedRoute";
 import { Suspense } from "react";
 
-const RegistrationPage = lazy(() => import('../pages/Registration/RegistrationPage'));
+const RegistrationPage = lazy(() => import('../pages/RegistrationPage/RegistrationPage'));
 
 
 export const App = () => {
