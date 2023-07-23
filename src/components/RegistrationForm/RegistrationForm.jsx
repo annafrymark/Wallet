@@ -9,7 +9,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'; 
-import logo from '../../utilities/images/wallet-icon.png';
+import logo from '../../utils/images/wallet-icon.png';
 import css from './registrationForm.module.css';
 import { register } from 'redux/auth/authOperations';
 import PasswordStrengthBar from './PasswordStrenghtBar';
