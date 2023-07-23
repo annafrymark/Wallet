@@ -10,8 +10,10 @@ import { TransactionsList } from './TransactionsTable/TransactionsTable';
 import { Balance } from './Balance/Balance';
 import { CurrencyTable } from './Currencies/Currencies';
 
-const RegistrationPage = lazy(() => import('../pages/RegistrationPage/RegistrationPage'));
-
+const RegistrationPage = lazy(() =>
+  import('../pages/RegistrationPage/RegistrationPage')
+);
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
