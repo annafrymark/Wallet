@@ -7,30 +7,13 @@ import { Formik, Form, FastField } from 'formik';
 import DateTimePicker from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import Switch from '@mui/material/Switch';
+import * as Yup from 'yup';
 
-const initialValuesInCome = {
-  price: '',
-  selectedDate: null,
-  comment: '',
-};
-
-const categories = [
-  'Car',
-  'Products',
-  'Main expenses',
-  'Self care',
-  'Child care',
-  'Household products',
-  'Education',
-  'Leisure',
-];
-
-const initialValuesExpense = {
-  category: '',
-  price: '',
-  selectedDate: null,
-  comment: '',
-};
+const validationSchema = Yup.object().shape({
+  price: Yup.number().required('Price is required'),
+  date: Yup.date().required('Date is required'),
+  category: Yup.string().required('Category is requred'),
+});
 
 const handleSubmit = (values, { setSubmitting, resetForm }) => {
   // logika dodawania elementu do listy
@@ -41,9 +24,23 @@ const handleSubmit = (values, { setSubmitting, resetForm }) => {
 };
 
 function FormIncome() {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
+  const initialValuesInCome = {
+    price: '',
+    selectedDate: null,
+    comment: '',
+  };
   return (
     <div>
-      <Formik initialValues={initialValuesExpense} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValuesInCome}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+      >
         {({ values, handleChange, setFieldValue, isSubmitting }) => (
           <Form>
             <label htmlFor="price">Price:</label>
@@ -56,8 +53,10 @@ function FormIncome() {
 
             <label>Date:</label>
             <DateTimePicker
-              onChange={date => setFieldValue(`selectedDate`, date)}
-              value={values.selectedDate}
+              onChange={handleDateChange}
+              value={selectedDate}
+              dateFormat="YYYY-MM-DD"
+              id="date"
             />
             <label htmlFor="comment">Comment:</label>
             <FastField
@@ -78,12 +77,37 @@ function FormIncome() {
 }
 
 function FormExpense() {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
+
+  const initialValuesExpense = {
+    category: '',
+    price: '',
+    selectedDate: null,
+    comment: '',
+  };
+  const categories = [
+    'Car',
+    'Products',
+    'Main expenses',
+    'Self care',
+    'Child care',
+    'Household products',
+    'Education',
+    'Leisure',
+  ];
   return (
     <div>
-      <Formik initialValues={initialValuesInCome} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValuesExpense}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+      >
         {({ values, handleChange, setFieldValue, isSubmitting }) => (
           <Form>
-            <label htmlFor="category">Category:</label>
             <FastField as="select" id="category" name="category">
               <option value="">Select a category</option>
               {categories.map(cat => (
@@ -102,9 +126,11 @@ function FormExpense() {
 
             <label>Date:</label>
             <DateTimePicker
-              onChange={date => setFieldValue(`selectedDate`, date)}
-              value={values.selectedDate}
+              onChange={handleDateChange}
+              value={selectedDate}
+              id="date"
             />
+
             <label htmlFor="comment">Comment:</label>
             <FastField
               as="textarea"
