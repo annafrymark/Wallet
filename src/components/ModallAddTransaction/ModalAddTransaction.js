@@ -8,6 +8,23 @@ import DateTimePicker from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import Switch from '@mui/material/Switch';
 import * as Yup from 'yup';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { Grid, ThemeProvider, createTheme } from '@mui/material';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#24CCA7',
+    },
+  },
+  typography: {
+    h1: {
+      color: '#ffff',
+      fontSize: '18px',
+    },
+  },
+});
 
 const validationSchema = Yup.object().shape({
   price: Yup.number().required('Price is required'),
@@ -42,34 +59,79 @@ function FormIncome() {
         validationSchema={validationSchema}
       >
         {({ values, handleChange, setFieldValue, isSubmitting }) => (
-          <Form>
-            <label htmlFor="price">Price:</label>
-            <FastField
-              type="number"
-              placeholder="0.00"
-              id="price"
-              name="price"
-            />
-
-            <label>Date:</label>
-            <DateTimePicker
-              onChange={handleDateChange}
-              value={selectedDate}
-              dateFormat="YYYY-MM-DD"
-              id="date"
-            />
-            <label htmlFor="comment">Comment:</label>
-            <FastField
-              as="textarea"
-              placeholder="Comment"
-              id="comment"
-              name="comment"
-            />
-            <button type="submit" disabled={isSubmitting}>
-              ADD
-            </button>
-            <button tyle="button">CANCEL</button>
-          </Form>
+          <ThemeProvider theme={theme}>
+            <Form>
+              <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+                spacing={1}
+              >
+                <Grid item xs={4}>
+                  <TextField
+                    type="number"
+                    label="Price"
+                    placeholder="0.00"
+                    id="price"
+                    name="price"
+                    value={values.price}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <DateTimePicker
+                    label="Date"
+                    onChange={handleDateChange}
+                    value={selectedDate}
+                    format="yyyy-MM-dd"
+                    id="date"
+                    name="date"
+                    renderInput={params => <TextField {...params} />}
+                  />
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    label="Comment"
+                    id="comment"
+                    name="comment"
+                    multiline
+                    rows={4}
+                    value={values.comment}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <div>
+                  <Grid item xs={6}>
+                    <Button
+                      type="submit"
+                      variant="h1"
+                      sx={{
+                        textAlign: 'center',
+                        color: '#ffff',
+                        backgroundColor: 'primary.main',
+                      }}
+                      disabled={isSubmitting}
+                    >
+                      ADD
+                    </Button>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Button
+                      sx={{
+                        color: '#4A56E2',
+                        backgroundColor: '#ffff',
+                        transform: 'none',
+                      }}
+                      type="button"
+                    >
+                      CANCEL
+                    </Button>
+                  </Grid>
+                </div>
+              </Grid>
+            </Form>
+          </ThemeProvider>
         )}
       </Formik>
     </div>
@@ -116,7 +178,7 @@ function FormExpense() {
                 </option>
               ))}
             </FastField>
-            <label htmlFor="price">Price:</label>
+
             <FastField
               type="number"
               placeholder="0.00"
@@ -124,14 +186,12 @@ function FormExpense() {
               name="price"
             />
 
-            <label>Date:</label>
             <DateTimePicker
               onChange={handleDateChange}
               value={selectedDate}
               id="date"
             />
 
-            <label htmlFor="comment">Comment:</label>
             <FastField
               as="textarea"
               placeholder="Comment"
@@ -181,7 +241,7 @@ const Modal = () => {
             <span className={css.headernone}>
               <Header />
             </span>
-            <h2>Add transction</h2>
+            <h2 className={css.title}>Add transction</h2>
             <Switch {...label} defaultChecked onClick={toggleForm}>
               {showIncomeForm ? 'Income' : 'Expense'}
             </Switch>
