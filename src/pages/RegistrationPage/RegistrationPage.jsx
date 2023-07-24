@@ -1,6 +1,6 @@
 import React from "react";
 import Media from "react-media";
-import picture from '../../utilities/images/frame-woman.png';
+import picture from '../../utils/images/frame-woman.png';
 import css from './RegistrationPage.module.css';
 import { RegisterForm } from "components/RegistrationForm/RegistrationForm";
 
