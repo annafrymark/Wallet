@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+.BalanceContainer {
+  background-color: white;
+  border-radius: 30px;
+  padding: 10px 0 12px 32px;
+}
+
+.BalanceTitle {
+  color: #a6a6a6;
+  font-family: 'Circe';
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.BalanceValue {
+  margin: 0;
+  color: #000;
+  font-family: 'Poppins';
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
