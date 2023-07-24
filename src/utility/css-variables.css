@@ -1,5 +1,7 @@
 @import '../stylesheet/font.css';
 
+/* SEARCH COLORS BY NAME OF ELEMENT */
+
 :root {
   --color-bg-primary: #e7eaf2;
   --color-bg-secondary: #ffffff;
