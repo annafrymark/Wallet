@@ -5,7 +5,6 @@ export const CurrencyTable = ({ currencies }) => {
   currencies = [
     { currency: 'USD', purchase: '27.55', sale: '27.65' },
     { currency: 'EUR', purchase: '30.00', sale: '30.10' },
-    { currency: 'PLN', purchase: '30.00', sale: '30.10' },
   ];
 
   return (

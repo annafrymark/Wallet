@@ -6,9 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/authOperations';
 import { RestrictedRoute } from './Routes/RestrictedRoute';
 import { Suspense } from 'react';
-import { TransactionsList } from './TransactionsTable/TransactionsTable';
-import { Balance } from './Balance/Balance';
-import { CurrencyTable } from './Currencies/Currencies';
+import { DashboardPage } from 'pages/DashboardPage/DashboardPage';
 
 const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
