@@ -23,7 +23,7 @@ const handleSubmit = (values, { setSubmitting, resetForm }) => {
   setSubmitting(false);
 };
 
-function FormIncome() {
+function FormIncome({ onCancel }) {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDateChange = date => {
@@ -77,7 +77,9 @@ function FormIncome() {
                 ADD
               </button>
 
-              <button type="button">CANCEL</button>
+              <button type="button" onClick={onCancel}>
+                CANCEL
+              </button>
             </div>
           </Form>
         )}
@@ -86,7 +88,7 @@ function FormIncome() {
   );
 }
 
-function FormExpense() {
+function FormExpense({ onCancel }) {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDateChange = date => {
@@ -137,7 +139,6 @@ function FormExpense() {
             <DateTime
               onChange={handleDateChange}
               value={selectedDate}
-              id="date"
               dateFormat="DD-MM-YYYY"
               timeFormat={false}
             />
@@ -151,7 +152,9 @@ function FormExpense() {
             <button type="submit" disabled={isSubmitting}>
               ADD
             </button>
-            <button tyle="button">CANCEL</button>
+            <button tyle="button" onClick={onCancel}>
+              CANCEL
+            </button>
           </Form>
         )}
       </Formik>
@@ -198,7 +201,11 @@ const Modal = () => {
               </Switch>
               <p className={css.switchtext}>Expense</p>
             </span>
-            {showIncomeForm ? <FormIncome /> : <FormExpense />}
+            {showIncomeForm ? (
+              <FormIncome onCancel={handleCloseModal} />
+            ) : (
+              <FormExpense onCancel={handleCloseModal} />
+            )}
           </div>
         </div>
       )}
