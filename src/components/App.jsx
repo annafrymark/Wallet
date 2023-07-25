@@ -4,6 +4,23 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/authOperations';
+import { RestrictedRoute } from './Routes/RestrictedRoute';
+import { Suspense } from 'react';
+import { TransactionsList } from './TransactionsTable/TransactionsTable';
+import { Balance } from './Balance/Balance';
+import { CurrencyTable } from './Currencies/Currencies';
+
+const RegistrationPage = lazy(() =>
+  import('../pages/RegistrationPage/RegistrationPage')
+);
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+
+// import useAuth from "hooks/useAuth";
+import React, { lazy } from 'react';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { refreshUser } from 'redux/auth/authOperations';
 
 import { RestrictedRoute } from './Routes/RestrictedRoute';
 import { Suspense } from 'react';
