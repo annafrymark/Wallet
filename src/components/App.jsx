@@ -34,7 +34,7 @@ export const App = () => {
             path="/home"
             element={
               <Suspense fallback={<div> Lodaing...</div>}>
-                <RestrictedRoute redirectTo="/" component={<CurrencyTable />} />
+                <RestrictedRoute redirectTo="/" component={<DashboardPage />} />
               </Suspense>
             }
           ></Route>
