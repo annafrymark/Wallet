@@ -1,0 +1,145 @@
+.TransactionsTable {
+  max-width: 300px;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.TransactionsTable thead {
+  display: none;
+}
+
+.TransactionsTable,
+.TransactionsTable tbody,
+.TransactionsTable tr,
+.TransactionsTable td {
+  display: block;
+  position: relative;
+  text-align: right;
+}
+
+.TransactionsTable tr {
+  margin-bottom: 8px;
+  border-radius: 10px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.IncomeRow::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: #24cca7;
+}
+
+.OutcomeRow::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: #ff6596;
+}
+
+.TransactionsTable td {
+  height: 47px;
+  display: flex;
+  gap: 0;
+  align-items: center;
+  justify-content: right;
+  flex-basis: auto;
+  border-bottom: 1px solid #dcdcdf;
+  padding-right: 20px;
+}
+
+.TransactionsTable tr td:last-child {
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  border-bottom: none;
+}
+
+@media (min-width: 768px) {
+  .TransactionsTable {
+    max-width: 720px;
+    display: table;
+    position: static;
+    margin: 0 auto;
+  }
+
+  .TransactionsTable thead {
+    display: table-row-group;
+    background: white;
+    width: 100%;
+  }
+
+  .TransactionsTable th {
+    padding: 15px 0;
+  }
+
+  .TransactionsTable tbody {
+    display: table-row-group;
+  }
+
+  .TransactionsTable tr {
+    display: table-row;
+    background: none;
+  }
+
+  .TransactionsTable td {
+    display: table-cell;
+  }
+
+  .IncomeRow::before {
+    display: none;
+  }
+  .OutcomeRow::before {
+    display: none;
+  }
+  .TransactionsTable tr td:last-child {
+    display: flex;
+    justify-content: right;
+    flex-direction: row;
+    border-bottom: 1px solid #dcdcdf;
+    padding-right: 20px;
+  }
+
+  .TransactionsTable tr td {
+    padding: 0;
+  }
+
+  .TransactionsTable th:nth-child(1),
+  .TransactionsTable td:nth-child(1),
+  .TransactionsTable th:nth-child(3),
+  .TransactionsTable td:nth-child(3),
+  .TransactionsTable th:nth-child(4),
+  .TransactionsTable td:nth-child(4) {
+    text-align: left;
+  }
+
+  .TransactionsTable th:nth-child(2),
+  .TransactionsTable td:nth-child(2) {
+    text-align: center;
+    width: 15%;
+  }
+
+  .TransactionsTable th:nth-child(1),
+  .TransactionsTable td:nth-child(1) {
+    padding-left: 20px;
+    width: 12%;
+  }
+
+  .TransactionsTable th:nth-child(1) {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+  }
+
+  .TransactionsTable th:last-child {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+}

@@ -1,14 +1,14 @@
-import React from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/joy/CircularProgress';
+import { FallingLines } from 'react-loader-spinner';
 
-export const Loader = ({ visable }) => {
-  return visable ? (
-    <Backdrop
-      sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }}
-      open={visable}
-    >
-      <CircularProgress color="inherit" />
-    </Backdrop>
-  ) : null;
+export const Loader = () => {
+  return (
+    <>
+      <FallingLines
+        color="#4fa94d"
+        width="100"
+        visible={true}
+        ariaLabel="falling-lines-loading"
+      />
+    </>
+  );
 };
