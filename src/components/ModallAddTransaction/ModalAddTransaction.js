@@ -73,29 +73,11 @@ function FormIncome() {
             />
 
             <div>
-              <button
-                type="submit"
-                variant="h1"
-                sx={{
-                  textAlign: 'center',
-                  color: '#ffff',
-                  backgroundColor: 'primary.main',
-                }}
-                disabled={isSubmitting}
-              >
+              <button type="submit" disabled={isSubmitting}>
                 ADD
               </button>
 
-              <button
-                sx={{
-                  color: '#4A56E2',
-                  backgroundColor: '#ffff',
-                  transform: 'none',
-                }}
-                type="button"
-              >
-                CANCEL
-              </button>
+              <button type="button">CANCEL</button>
             </div>
           </Form>
         )}
@@ -156,6 +138,8 @@ function FormExpense() {
               onChange={handleDateChange}
               value={selectedDate}
               id="date"
+              dateFormat="DD-MM-YYYY"
+              timeFormat={false}
             />
 
             <FastField
