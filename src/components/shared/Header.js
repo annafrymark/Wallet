@@ -1,5 +1,7 @@
 import React from 'react';
 import css from './Header.module.css';
+// import wallet from '../images/wallet.png';
+// import exit from '../images/exit.png';
 import { ReactComponent as Wallet } from '../images/wallet.svg';
 import { ReactComponent as Exit } from '../images/exit.svg';
 
@@ -7,7 +9,9 @@ const Header = () => {
   return (
     <header className={css.header}>
       <h1 className={css.title}>
-        <img className={css.imgwallet} src={<Wallet />} alt="Logo" />
+        <div className={css.svgwallet}>
+          <Wallet />
+        </div>
         Wallet
       </h1>
       <div className={css.buttonContainer}>
@@ -16,7 +20,7 @@ const Header = () => {
         </button>
         <p className={css.border}>|</p>
         <div className={css.buttonExitContainer}>
-          <img className={css.imgexit} src={Exit} alt="exit" />
+          <Exit />
           <button type="button" className={css.buttonExit}>
             Exit
           </button>
