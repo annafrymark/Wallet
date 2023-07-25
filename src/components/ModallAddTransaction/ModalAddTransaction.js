@@ -4,27 +4,10 @@ import { ReactComponent as Plus } from '../images/plus.svg';
 import { ReactComponent as Close } from '../images/close.svg';
 import Header from 'components/shared/Header';
 import { Formik, Form, FastField } from 'formik';
-import DateTimePicker from 'react-datetime';
+import DateTime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import Switch from '@mui/material/Switch';
 import * as Yup from 'yup';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { Grid, ThemeProvider, createTheme } from '@mui/material';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#24CCA7',
-    },
-  },
-  typography: {
-    h1: {
-      color: '#ffff',
-      fontSize: '18px',
-    },
-  },
-});
 
 const validationSchema = Yup.object().shape({
   price: Yup.number().required('Price is required'),
@@ -59,79 +42,62 @@ function FormIncome() {
         validationSchema={validationSchema}
       >
         {({ values, handleChange, setFieldValue, isSubmitting }) => (
-          <ThemeProvider theme={theme}>
-            <Form>
-              <Grid
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                spacing={1}
+          <Form>
+            <FastField
+              type="number"
+              placeholder="0.00"
+              id="price"
+              name="price"
+              value={values.price}
+              onChange={handleChange}
+            />
+
+            <DateTime
+              dateFormat="DD-MM-YYYY"
+              timeFormat={false}
+              onChange={handleDateChange}
+              value={selectedDate}
+              id="date"
+              name="date"
+              className={css.dateTime}
+            />
+
+            <FastField
+              placeholder="Comment"
+              id="comment"
+              name="comment"
+              multiline
+              rows={4}
+              value={values.comment}
+              onChange={handleChange}
+            />
+
+            <div>
+              <button
+                type="submit"
+                variant="h1"
+                sx={{
+                  textAlign: 'center',
+                  color: '#ffff',
+                  backgroundColor: 'primary.main',
+                }}
+                disabled={isSubmitting}
               >
-                <Grid item xs={4}>
-                  <TextField
-                    type="number"
-                    label="Price"
-                    placeholder="0.00"
-                    id="price"
-                    name="price"
-                    value={values.price}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <DateTimePicker
-                    label="Date"
-                    onChange={handleDateChange}
-                    value={selectedDate}
-                    format="yyyy-MM-dd"
-                    id="date"
-                    name="date"
-                    renderInput={params => <TextField {...params} />}
-                  />
-                </Grid>
-                <Grid item xs={8}>
-                  <TextField
-                    label="Comment"
-                    id="comment"
-                    name="comment"
-                    multiline
-                    rows={4}
-                    value={values.comment}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <div>
-                  <Grid item xs={6}>
-                    <Button
-                      type="submit"
-                      variant="h1"
-                      sx={{
-                        textAlign: 'center',
-                        color: '#ffff',
-                        backgroundColor: 'primary.main',
-                      }}
-                      disabled={isSubmitting}
-                    >
-                      ADD
-                    </Button>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Button
-                      sx={{
-                        color: '#4A56E2',
-                        backgroundColor: '#ffff',
-                        transform: 'none',
-                      }}
-                      type="button"
-                    >
-                      CANCEL
-                    </Button>
-                  </Grid>
-                </div>
-              </Grid>
-            </Form>
-          </ThemeProvider>
+                ADD
+              </button>
+
+              <button
+                sx={{
+                  color: '#4A56E2',
+                  backgroundColor: '#ffff',
+                  transform: 'none',
+                }}
+                type="button"
+              >
+                CANCEL
+              </button>
+            </div>
+          </Form>
         )}
       </Formik>
     </div>
@@ -162,7 +128,7 @@ function FormExpense() {
     'Leisure',
   ];
   return (
-    <div>
+    <div className={css.modalForm}>
       <Formik
         initialValues={initialValuesExpense}
         onSubmit={handleSubmit}
@@ -186,7 +152,7 @@ function FormExpense() {
               name="price"
             />
 
-            <DateTimePicker
+            <DateTime
               onChange={handleDateChange}
               value={selectedDate}
               id="date"
@@ -213,7 +179,6 @@ const Modal = () => {
   const [showModal, setShowModal] = useState(false);
   const [showIncomeForm, setShowIncomeForm] = useState(true);
 
-  const label = { inputProps: { 'aria-label': 'Switch demo' } };
   const toggleForm = () => {
     setShowIncomeForm(prevShowIncomeFrom => !prevShowIncomeFrom);
   };
@@ -242,9 +207,13 @@ const Modal = () => {
               <Header />
             </span>
             <h2 className={css.title}>Add transction</h2>
-            <Switch {...label} defaultChecked onClick={toggleForm}>
-              {showIncomeForm ? 'Income' : 'Expense'}
-            </Switch>
+            <span className={css.switchButton}>
+              <p className={css.switchtext}>Income</p>
+              <Switch defaultChecked onClick={toggleForm}>
+                {showIncomeForm ? 'Income' : 'Expense'}
+              </Switch>
+              <p className={css.switchtext}>Expense</p>
+            </span>
             {showIncomeForm ? <FormIncome /> : <FormExpense />}
           </div>
         </div>

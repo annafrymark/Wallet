@@ -36,7 +36,12 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
+.switchButton {
+  display: flex;
+}
+.modalForm {
+  display: flex;
+}
 .closebutton {
   cursor: pointer;
   font-size: 20px;
@@ -50,10 +55,18 @@
   font-size: 30px;
   margin-top: 0px;
 }
-
-.switchbutton {
+.switchButton {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+.switchtext {
+  color: #e0e0e0;
+}
+
+.dateTime {
+  border: none;
+  padding: 10px;
 }
 
 @media (min-width: 768px) {
