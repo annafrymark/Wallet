@@ -4,8 +4,8 @@
 @media screen and (min-width: 768px) {
     .Container {
         background-image: 
-            url(../../utilities/images/ellipse-violet.png),
-            url(../../utilities/images/ellipse-peach.png);
+            url(../../utils/images/ellipse-violet.png),
+            url(../../utils/images/ellipse-peach.png);
 
         background-repeat: no-repeat, no-repeat;
         background-position: bottom left, top right;
