@@ -1,0 +1,71 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #ffffff;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.svgwallet {
+  margin-right: 18px;
+  margin-left: 20px;
+}
+.buttonContainer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.border {
+  color: #bdbdbd;
+  margin-top: 19px;
+  font-size: 26px;
+  display: none;
+}
+.button {
+  background-color: #ffffff;
+  color: #bdbdbd;
+  border: none;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+.buttonExit {
+  background-color: #ffffff;
+  color: #bdbdbd;
+  border: none;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  font-size: 16px;
+  margin-right: 29px;
+}
+.buttonExitContainer {
+  display: flex;
+  cursor: pointer;
+  margin-right: 30px;
+}
+
+@media (min-width: 768px) {
+  .border {
+    display: flex;
+  }
+  .buttonExit {
+    background-color: #ffffff;
+    color: #bdbdbd;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-style: normal;
+    line-height: normal;
+  }
+}
