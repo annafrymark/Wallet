@@ -1,7 +1,13 @@
 import React from 'react';
 import css from './Header.module.css';
+<<<<<<< Updated upstream
 import wallet from '../images/wallet.png';
 import exit from '../images/exit.png';
+=======
+import { ReactComponent as Wallet } from '../images/wallet.svg';
+import { ReactComponent as Exit } from '../images/exit.svg';
+
+>>>>>>> Stashed changes
 const Header = () => {
   return (
     <header className={css.header}>
