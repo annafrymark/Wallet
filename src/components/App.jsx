@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/authOperations';
-
 import { RestrictedRoute } from './Routes/RestrictedRoute';
 import { Suspense } from 'react';
 import { DashboardPage } from 'pages/DashboardPage/DashboardPage';
@@ -13,6 +12,8 @@ const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
 );
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+
+// import useAuth from "hooks/useAuth";
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export const App = () => {
             path="/home"
             element={
               <Suspense fallback={<div> Lodaing...</div>}>
-                <RestrictedRoute redirectTo="/" component={<DashboardPage />} />
+                <RestrictedRoute redirectTo="/" component={<CurrencyTable />} />
               </Suspense>
             }
           ></Route>
