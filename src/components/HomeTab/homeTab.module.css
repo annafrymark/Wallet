@@ -1,0 +1,58 @@
+.HomeTab {
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.Container {
+  padding-top: 12px;
+  padding-bottom: 32px;
+}
+
+.LeftSide div:first-child {
+  margin-bottom: 12px;
+}
+
+.CurrencyContainer {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .Home-Tab {
+    max-width: 1080px;
+  }
+  .Container {
+    display: flex;
+    width: 100%;
+    column-gap: 32px;
+    padding-top: 32px;
+    padding-bottom: 20px;
+  }
+
+  .LeftSide {
+    display: flex;
+    flex-basis: 50%;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 28px;
+  }
+
+  .CurrencyContainer {
+    display: block;
+    flex-basis: 50%;
+    flex-grow: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .HomeTab {
+    display: flex;
+  }
+  .Container {
+    display: block;
+    padding: 40px 69px 40px 16px;
+  }
+
+  .LeftSide {
+    margin-bottom: 32px;
+  }
+}

@@ -7,7 +7,7 @@ export const TransactionsList = () => {
   const transactions = [
     {
       id: 1,
-      date: '19.07.2023',
+      date: '19.07.23',
       type: '-',
       category: 'Food',
       comment: 'Lunch',
@@ -15,7 +15,7 @@ export const TransactionsList = () => {
     },
     {
       id: 2,
-      date: '18.07.2023',
+      date: '18.07.23',
       type: '+',
       category: 'Income',
       comment: 'Bus fare',
@@ -23,7 +23,7 @@ export const TransactionsList = () => {
     },
     {
       id: 3,
-      date: '15.07.2023',
+      date: '15.07.23',
       type: '+',
       category: 'Salary',
       comment: 'Monthly salary',
@@ -31,7 +31,7 @@ export const TransactionsList = () => {
     },
     {
       id: 4,
-      date: '14.07.2023',
+      date: '14.07.23',
       type: '-',
       category: 'Entertainment',
       comment: 'Movie tickets',
@@ -39,7 +39,7 @@ export const TransactionsList = () => {
     },
     {
       id: 5,
-      date: '13.07.2023',
+      date: '13.07.23',
       type: '-',
       category: 'Shopping',
       comment: 'Groceries',
