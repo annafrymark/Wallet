@@ -1,4 +1,55 @@
+@import '../stylesheet/font.css';
 
+/* SEARCH COLORS BY NAME OF ELEMENT */
+:root {
+    --color-bg-primary: #e7eaf2;
+    --color-bg-secondary: #ffffff;
+    --color-bg-delete-btn-hover: #1ea487;
+    --color-bg-add-btn-hover: #1ea487;
+    --color-bg-cancel-btn-hover: #ede9e8;
+    /* background (statistics, home, mobile) */
+    --color-bg-statistics: #ffffff66;
+    /* months mobile  */
+    --color-bg-months: #0000001a;
+    --color-bg-nav-icons: #4a56e290;
+    /* text and frame of button (login, register), rectangle (vector with currencies, home), icon of wallet (header), icon of statistics and home, cancel button, icon of caledar (add transaction), not active icons  (mobile)*/
+    --color-bg-nav-icons-active: #4a56e2;
+    --color-text-primary: #000000;
+    /* frame in select a category (add transaction, statistics), years bacground (mobile) */
+    --color-frame-category: #ffffffb2;
+    --color-Gray1: #dcdcdf;
+    --color-Gray2: #f0f0f0;
+    /* your balance text */
+    --color-gray3: #a6a6a6;
+    /* text in forms (login, register), text and icons in header (Name, Exit), sum of income/expense (add transaction), comment text (add transaction mobile) */
+    --color-gray4: #bdbdbd;
+    /* icons and underline in forms (login, register), frame around income expense switch, expense text, underlines, text comment and select a category (add transaction), expense text, slash icon, frame of switch (add transaction/edit transaction mobile)  */
+    --color-gray5: #e0e0e0;
+    /* green button, button underline when checking password strength (login, register), green sum, green buttons (table), icon of wallet (header), switch and text "income", green button (home, add transaction), category "leisure" (diagram), income sum (statistics), delete button, add button, incomes, underlines (mobile home)  */
+    --color-green: #24cca7;
+    /* underline of checking strength of password (login, register) */
+    --color-underline-password: #e5f1ef;
+    /* Red sum (table), expense switch and text, selected category (add transaction), expenses sum (statistics), outcome table elements and sum(mobile home)  */
+    --color-pink: #ff6596;
+    /* diagram colors */
+    --color-category-main: #fed057;
+    /* vector in background (login, register) */
+    --color-category-products: #ffd8d0;
+    --color-category-car: #fd9498;
+    /* vector in background (login, register) */
+    --color-category-selfcare: #c5baff;
+    /* active element (mobile) */
+    --color-category-childcare: #6e78e8;
+    --color-category-household: #4a56e2;
+    --color-category-education: #81e1ff;
+    --color-category-other: #00ad84;
+    /* categories underlines (diagram mobile) */
+    --color-categories-underlines: #ffffff99;
+    --color-transaction-border: #dcdcdf;
+    --color-middle-border: #dcdcdf;
+    --color-delete-btn-font: #ffffff;
+    --color-blur: #ffffff4d;
+    --color-backdrop: rgba(0, 0, 0, 0.25);
     --font-primary: 'Poppins';
     --font-secondary: 'Hind Siliguri', sans-serif;
 }

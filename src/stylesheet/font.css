@@ -3,7 +3,4 @@
     src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype');
 }
 
-@font-face {
-    font-family: 'Hind Siliguri';
-    src: url('../assets/fonts/HindSiliguri-Regular.ttf') format('truetype');
-}
+@import url('https://fonts.cdnfonts.com/css/circe');
