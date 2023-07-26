@@ -1,17 +1,16 @@
-//import { useDispatch } from 'react-redux';
-//import { deleteContact } from 'redux/operations';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import css from './transaction.module.css';
+import { useDispatch } from 'react-redux';
+import { deleteTransaction } from '../../redux/transactions/operations';
 
 export const Transaction = ({ transaction }) => {
-  //const dispatch = useDispatch();
   const handleEdit = () => {
     console.log('edit');
     //dispatch(editTransaction(transaction.id));
   };
-
+  const dispatch = useDispatch();
   const handleDelete = () => {
-    //dispatch(deleteTransaction(transaction.id));
+    dispatch(deleteTransaction(transaction._id));
     console.log('delete');
   };
   return (
@@ -30,7 +29,7 @@ export const Transaction = ({ transaction }) => {
       </td>
       <td
         data-label="Sum"
-        className={transaction.type === '+' ? css.Income : css.Outcome}
+        className={transaction.category === 'Income' ? css.Income : css.Outcome}
       >
         {transaction.sum}
       </td>

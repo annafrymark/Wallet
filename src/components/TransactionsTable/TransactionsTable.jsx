@@ -19,9 +19,11 @@ export const TransactionsList = ({ transactions }) => {
         <tbody>
           {transactions.map(transaction => (
             <tr
-              key={transaction.id}
+              key={transaction._id}
               className={
-                transaction.type === '+' ? css.IncomeRow : css.OutcomeRow
+                transaction.category === 'Income'
+                  ? css.IncomeRow
+                  : css.OutcomeRow
               }
             >
               <Transaction transaction={transaction} />
@@ -32,46 +34,3 @@ export const TransactionsList = ({ transactions }) => {
     </div>
   );
 };
-
-// const transactions = [
-//   {
-//     id: 1,
-//     date: '19.07.23',
-//     type: '-',
-//     category: 'Food',
-//     comment: 'Lunch',
-//     sum: 10.5,
-//   },
-//   {
-//     id: 2,
-//     date: '18.07.23',
-//     type: '+',
-//     category: 'Income',
-//     comment: 'Bus fare',
-//     sum: 2.0,
-//   },
-//   {
-//     id: 3,
-//     date: '15.07.23',
-//     type: '+',
-//     category: 'Salary',
-//     comment: 'Monthly salary',
-//     sum: 2500.0,
-//   },
-//   {
-//     id: 4,
-//     date: '14.07.23',
-//     type: '-',
-//     category: 'Entertainment',
-//     comment: 'Movie tickets',
-//     sum: 15.0,
-//   },
-//   {
-//     id: 5,
-//     date: '13.07.23',
-//     type: '-',
-//     category: 'Shopping',
-//     comment: 'Groceries',
-//     sum: 30.0,
-//   },
-// ];
