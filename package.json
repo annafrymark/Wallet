@@ -8,11 +8,8 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.5",
     "@mui/icons-material": "^5.14.1",
-   
     "@mui/material": "^5.14.2",
     "@mui/styled-engine-sc": "^5.12.0",
- 
-
     "@redux-devtools/extension": "^3.2.5",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.3",
@@ -29,6 +26,7 @@
     "notiflix": "^3.2.6",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
+
     "react": "^18.1.0",
     "react-datetime": "^3.2.0",
     "react-datetime-picker": "^5.2.2",
