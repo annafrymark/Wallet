@@ -3,42 +3,46 @@ import StatisticsIcon from '@mui/icons-material/Insights';
 import CurrencyIcon from '@mui/icons-material/AttachMoney';
 import Media from 'react-media';
 import css from './dashboardMenu.module.css';
+import { Link } from 'react-router-dom';
 
 export const DashboardMenu = ({ activeTab, onTabChange }) => {
   return (
     <div className={css.MenuContainer}>
       <ul className={css.ButtonsList}>
         <li>
-          <button
+          <Link
+            to="/home"
             data-label="Home"
-            onClick={() => onTabChange('home')}
+            // onClick={() => onTabChange('home')}
             className={activeTab === 'home' ? 'active' : ''}
           >
             <HomeIcon className={css.Icon} />
-          </button>
+          </Link>
         </li>
         <li>
-          <button
+          <Link
+            to="/diagram"
             data-label="Statistics"
-            onClick={() => onTabChange('statistics')}
+            // onClick={() => onTabChange('statistics')}
             className={activeTab === 'statistics' ? 'active' : ''}
           >
             <StatisticsIcon
               // style={{ fill: 'white', fontSize: '40px' }}
               className={css.Icon}
             />
-          </button>
+          </Link>
         </li>
         <Media
           query="(max-width: 767px)"
           render={() => (
             <li>
-              <button
-                onClick={() => onTabChange('currencies')}
+              <Link
+                to="currencies"
+                // onClick={() => onTabChange('currencies')}
                 className={activeTab === 'currencies' ? 'active' : ''}
               >
                 <CurrencyIcon className={css.Icon} />
-              </button>
+              </Link>
             </li>
           )}
         />
@@ -46,3 +50,5 @@ export const DashboardMenu = ({ activeTab, onTabChange }) => {
     </div>
   );
 };
+
+// powiedzieć, że mnie nie będzie wieczorem
