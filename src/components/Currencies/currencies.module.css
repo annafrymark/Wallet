@@ -1,0 +1,68 @@
+.CurrenciesTableContainer {
+  border-radius: 30px;
+  background-color: #4a56e2;
+  position: relative;
+  padding-bottom: 50px;
+  overflow: hidden;
+}
+
+.BackgroundContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.CurrenciesTable {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.CurrenciesTable thead {
+  filter: (255, 255, 255, 0.2);
+  height: 50px;
+  position: relative;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.CurrenciesTableContainer thead::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.CurrenciesTable tbody tr {
+  display: table-row;
+  height: 40px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.CurrenciesTable tr td:first-child,
+.CurrenciesTable tr th:first-child {
+  padding-left: 20px;
+  text-align: left;
+}
+
+.CurrenciesTable tr td:last-child,
+.CurrenciesTable tr th:last-child {
+  padding-right: 20px;
+  text-align: right;
+}
+
+.CurrenciesTable tr td:nth-child(2),
+.CurrenciesTable tr th:nth-child(2) {
+  padding-right: 20px;
+  padding-left: 20px;
+  text-align: left;
+}
