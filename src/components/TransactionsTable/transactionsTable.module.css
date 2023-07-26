@@ -60,7 +60,7 @@
 .TransactionsTable tr td:last-child {
   justify-content: space-between;
   flex-direction: row-reverse;
-  border-bottom: none;
+  border-bottom: 1px solid transparent;
 }
 
 @media (min-width: 768px) {
@@ -87,10 +87,17 @@
   .TransactionsTable tr {
     display: table-row;
     background: none;
+    border-bottom: 1px solid #dcdcdf;
+    filter: drop-shadow(0px 1px 0px rgba(255, 255, 255, 0.6));
+  }
+
+  .TransactionsTable thead tr:first-child {
+    border-bottom: none;
   }
 
   .TransactionsTable td {
     display: table-cell;
+    border: none;
   }
 
   .IncomeRow::before {
@@ -103,7 +110,6 @@
     display: flex;
     justify-content: right;
     flex-direction: row;
-    border-bottom: 1px solid #dcdcdf;
     padding-right: 10px;
   }
 
