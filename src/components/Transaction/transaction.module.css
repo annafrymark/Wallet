@@ -1,3 +1,9 @@
+td {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 td::before {
   content: attr(data-label);
   position: absolute;
@@ -6,7 +12,6 @@ td::before {
   padding-left: 20px;
   text-align: left;
   color: #000;
-
   font-size: 18px;
   font-style: normal;
   font-weight: 700;

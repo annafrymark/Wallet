@@ -1,0 +1,53 @@
+.DashboardPageBcg {
+  background-image: url(../../utils/images/ellipse-violet.png),
+    url(../../utils/images/ellipse-peach.png);
+
+  background-repeat: no-repeat, no-repeat;
+  background-position: bottom left, top right;
+  background-color: #e7eaf2;
+  position: relative;
+}
+.test {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(25px);
+  width: 100vw;
+  height: 100vh;
+}
+
+.DisplayedElemContainer {
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .DashboardPageBcg {
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 1028px) {
+  .DashboardPage {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .HomeTabContainer {
+    flex-basis: 37%;
+    border-right: 1px solid #e7e5f2;
+
+    filter: drop-shadow(1px 0px 0px rgba(255, 255, 255, 0.6))
+      drop-shadow(-1px 0px 0px rgba(0, 0, 0, 0.05));
+  }
+
+  .DisplayedElemContainer {
+    padding: 46px 16px 46px 69px;
+    flex-basis: 63%;
+  }
+}

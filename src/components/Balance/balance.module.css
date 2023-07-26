@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 .BalanceContainer {
+  width: 100%;
   background-color: white;
   border-radius: 30px;
   padding: 10px 0 12px 32px;
+  box-sizing: border-box;
 }
 
 .BalanceTitle {
+  margin: 0;
   color: #a6a6a6;
   font-family: 'Circe';
   font-size: 12px;

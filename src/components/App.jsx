@@ -15,6 +15,14 @@ const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
 );
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+import { DashboardPage } from 'pages/DashboardPage/DashboardPage';
+
+const RegistrationPage = lazy(() =>
+  import('../pages/RegistrationPage/RegistrationPage')
+);
+
+
+// import useAuth from "hooks/useAuth";
 
 export const App = () => {
   const dispatch = useDispatch();
