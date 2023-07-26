@@ -6,8 +6,8 @@ import { deleteTransaction } from '../../redux/transactions/operations';
 export const Transaction = ({ transaction }) => {
   const handleEdit = () => {
     console.log('edit');
-    //dispatch(editTransaction(transaction.id));
   };
+
   const dispatch = useDispatch();
   const handleDelete = () => {
     dispatch(deleteTransaction(transaction._id));
@@ -35,7 +35,7 @@ export const Transaction = ({ transaction }) => {
       </td>
       <td>
         <button className={css.EditButton} onClick={handleEdit}>
-          <EditOutlinedIcon style={{ fontSize: '16px' }} />{' '}
+          <EditOutlinedIcon style={{ fontSize: '16px' }} />
           <span className={css.EditButtonText}>Edit</span>
         </button>
         <button className={css.DeleteButton} onClick={handleDelete}>

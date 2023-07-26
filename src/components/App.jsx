@@ -6,13 +6,10 @@ import { Route, Routes } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/authOperations';
 import { RestrictedRoute } from './Routes/RestrictedRoute';
 import { Suspense } from 'react';
-// import { TransactionsList } from './TransactionsTable/TransactionsTable';
-// import { Balance } from './Balance/Balance';
-import { CurrencyTable } from './Currencies/Currencies';
 import { Loader } from './Loader/Loader';
+import { DashboardPage } from '../pages/DashboardPage/DashboardPage';
 
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
-// import { DashboardPage } from 'pages/DashboardPage/DashboardPage';
 
 const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
@@ -39,7 +36,7 @@ export const App = () => {
             path="/home"
             element={
               <Suspense fallback={<div> Lodaing...</div>}>
-                <RestrictedRoute redirectTo="/" component={<CurrencyTable />} />
+                <RestrictedRoute redirectTo="/" component={<DashboardPage />} />
               </Suspense>
             }
           ></Route>
