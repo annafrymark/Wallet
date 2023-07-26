@@ -1,8 +1,8 @@
-import { TransactionsList } from '../TransactionsTable/TransactionsTable';
+// import { TransactionsList } from '../TransactionsTable/TransactionsTable';
 import { Balance } from '../Balance/Balance';
 import { CurrencyTable } from '../Currencies/Currencies';
 import { DashboardMenu } from '..//DashboardMenu/DashboardMenu';
-import Media from 'react-media';
+// import Media from 'react-media';
 import css from './homeTab.module.css';
 
 export const HomeTab = () => {
