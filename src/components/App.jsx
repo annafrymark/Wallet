@@ -6,12 +6,17 @@ import { Route, Routes } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/authOperations';
 import { RestrictedRoute } from './Routes/RestrictedRoute';
 import { Suspense } from 'react';
-import { DashboardPage } from 'pages/DashboardPage/DashboardPage';
+// import { TransactionsList } from './TransactionsTable/TransactionsTable';
+// import { Balance } from './Balance/Balance';
+import { CurrencyTable } from './Currencies/Currencies';
+import { Loader } from './Loader/Loader';
+
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+// import { DashboardPage } from 'pages/DashboardPage/DashboardPage';
 
 const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
 );
-const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 
 // import useAuth from "hooks/useAuth";
 
@@ -25,7 +30,7 @@ export const App = () => {
 
   return (
     <div>
-      <Suspense fallback={<div> Lodaing...</div>}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -34,7 +39,7 @@ export const App = () => {
             path="/home"
             element={
               <Suspense fallback={<div> Lodaing...</div>}>
-                <RestrictedRoute redirectTo="/" component={<DashboardPage />} />
+                <RestrictedRoute redirectTo="/" component={<CurrencyTable />} />
               </Suspense>
             }
           ></Route>
