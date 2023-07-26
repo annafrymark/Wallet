@@ -1,3 +1,5 @@
+// import Backdrop from '@mui/material/Backdrop';
+import Backdrop from '@mui/material/Backdrop';
 import { FallingLines } from 'react-loader-spinner';
 
 export const Loader = () => {
@@ -6,7 +8,7 @@ export const Loader = () => {
       sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }}
       open={true}
     >
-      <CircularProgress color="inherit" />
+      <FallingLines color="inherit" />
     </Backdrop>
   );
 };
