@@ -14,11 +14,26 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
+const calculateBalance = transactions => {
+  let balance = 0;
+
+  transactions.forEach(transaction => {
+    if (transaction.category === 'Income') {
+      balance += transaction.sum;
+    } else {
+      balance -= transaction.sum;
+    }
+  });
+
+  return balance;
+};
+
 const transactionSlice = createSlice({
   name: 'transactions',
 
   initialState: {
     items: [],
+    balance: 0,
     isLoading: false,
     error: null,
   },
@@ -29,6 +44,7 @@ const transactionSlice = createSlice({
       state.isLoading = false;
       state.error = null;
       state.items = action.payload;
+      state.balance = calculateBalance(action.payload);
     },
     [fetchTransactions.rejected]: handleRejected,
 
