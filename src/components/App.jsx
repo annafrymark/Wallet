@@ -6,21 +6,17 @@ import { Route, Routes } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/authOperations';
 import { RestrictedRoute } from './Routes/RestrictedRoute';
 import { Suspense } from 'react';
-import { TransactionsList } from './TransactionsTable/TransactionsTable';
-import { Balance } from './Balance/Balance';
+// import { TransactionsList } from './TransactionsTable/TransactionsTable';
+// import { Balance } from './Balance/Balance';
 import { CurrencyTable } from './Currencies/Currencies';
 import { Loader } from './Loader/Loader';
 
-const RegistrationPage = lazy(() =>
-  import('../pages/RegistrationPage/RegistrationPage')
-);
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
-import { DashboardPage } from 'pages/DashboardPage/DashboardPage';
+// import { DashboardPage } from 'pages/DashboardPage/DashboardPage';
 
 const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
 );
-
 
 // import useAuth from "hooks/useAuth";
 
