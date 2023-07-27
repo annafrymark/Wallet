@@ -1,13 +1,14 @@
 // import React from 'react';
-import css from './LoginForm.module.css';
-import ToRegisterButton from '../../components/LoginPage/ToRegisterButton';
+import css from './loginForm.module.css';
+import ToRegisterButton from '../../pages/LoginPage';
 import { ReactSVG } from 'react-svg';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import { object, string } from 'yup';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-
+// import svg from '../../../public/svg';
 
 const userSchema = object({
   email: string().email('Invalid email').required('Email is required'),
@@ -17,7 +18,7 @@ const userSchema = object({
     .required('Password is required'),
 });
 
-const LoginPage = () => {
+const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuth = useSelector(state => state.session.isAuth);
@@ -146,4 +147,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginForm;

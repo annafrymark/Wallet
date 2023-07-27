@@ -50,7 +50,7 @@ export const RegisterForm = () => {
         const name = form.elements.name.value;
 
         dispatch(register({ email, password, confirmPassword, name, }));
-        console.log('cos cos cos');
+        // console.log('cos cos cos');
         console.log(email, password, confirmPassword, name);
         navigate('/login');
         form.reset();
