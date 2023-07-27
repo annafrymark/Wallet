@@ -8,6 +8,9 @@ import DateTime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import Switch from '@mui/material/Switch';
 import * as Yup from 'yup';
+// import { handleSubmit } from './transactionUtils';
+import { useDispatch } from 'react-redux';
+import { addTransaction } from 'redux/transaction/transactionOperations';
 
 const validationSchema = Yup.object().shape({
   price: Yup.number().required('Price is required'),
@@ -15,81 +18,227 @@ const validationSchema = Yup.object().shape({
   category: Yup.string().required('Category is requred'),
 });
 
-const handleSubmit = (values, { setSubmitting, resetForm }) => {
-  // logika dodawania elementu do listy
-  console.log(values);
+// function FormIncome({ onCancel }) {
+//   const [selectedDate, setSelectedDate] = useState(new Date());
+//   const dispatch = useDispatch();
+//   const handleDateChange = date => {
+//     setSelectedDate(date);
+//   };
+//   const initialValuesInCome = {
+//     price: '',
+//     selectedDate: null,
+//     comment: '',
+//   };
 
-  resetForm();
-  setSubmitting(false);
-};
+//   // const handleFormSubmit = async (values, formikHelpers) => {
+//   //   const { resetForm, setSubmitting } = formikHelpers;
+//   //   const newTransaction = {
+//   //     dispatch,
+//   //     price: values.price,
+//   //     date: values.date,
+//   //     comment: values.comment,
+//   //     type: 'income',
+//   //   };
+
+//   //   try {
+//   //     await dispatch(addTransaction(newTransaction));
+//   //   } catch (error) {
+//   //     console.error('Transaction submission error:', error);
+//   //   }
+//   //   resetForm();
+//   //   setSubmitting(false);
+//   // };
+
+//   const onSubmit = async (values, formikHelpers) => {
+//     const { resetForm, setSubmitting } = formikHelpers;
+
+//     const newTransaction = {
+//       price: values.price,
+//       date: values.date,
+//       comment: values.comment,
+//     };
+
+//     await dispatch(addTransaction(newTransaction));
+
+//     resetForm();
+//     setSubmitting(false);
+//   };
+
+//   const handleFormSubmit = event => {
+//     event.preventDefault();
+//     formik.submitForm(); // Dodaj tę linię, aby wywołać funkcję onSubmit z Formik
+//   };
+//   const formik = useFormik({
+//     initialValues: initialValuesInCome,
+//     validationSchema: validationSchema,
+//     onSubmit: handleFormSubmit,
+//   });
+
+//   return (
+//     <div>
+//       <Formik
+//         initialValues={formik.initialValues}
+//         validationSchema={formik.validationSchema}
+//         onSubmit={onSubmit}
+//       >
+//         {({ values, handleChange, setFieldValue, isSubmitting }) => (
+//           <Form onSubmit={handleFormSubmit}>
+//             <FastField
+//               type="number"
+//               placeholder="0.00"
+//               id="price"
+//               name="price"
+//               value={values.price}
+//               onChange={handleChange}
+//             />
+
+//             <DateTime
+//               dateFormat="DD-MM-YYYY"
+//               timeFormat={false}
+//               onChange={handleDateChange}
+//               value={selectedDate}
+//               id="date"
+//               name="date"
+//               className={css.dateTime}
+//             />
+
+//             <FastField
+//               placeholder="Comment"
+//               id="comment"
+//               name="comment"
+//               multiline
+//               rows={4}
+//               value={values.comment}
+//               onChange={handleChange}
+//             />
+
+//             <div>
+//               <button onClick={handleFormSubmit} disabled={isSubmitting}>
+//                 ADD
+//               </button>
+
+//               <button type="button" onClick={onCancel}>
+//                 CANCEL
+//               </button>
+//             </div>
+//           </Form>
+//         )}
+//       </Formik>
+//     </div>
+//   );
+// }
 
 function FormIncome({ onCancel }) {
+  const [price, setPrice] = useState('');
+  const [comment, setComment] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const dispatch = useDispatch();
+  // const handleDateChange = date => {
+  //   setSelectedDate(date);
+  // };
+  // const initialValuesInCome = {
+  //   price: '',
+  //   selectedDate: null,
+  //   comment: '',
+  // };
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
+  const handleChange = event => {
+    const { name, value } = event.target;
+
+    switch (name) {
+      case 'price':
+        setPrice(value);
+        break;
+
+      case 'date':
+        setSelectedDate(value);
+        break;
+
+      case 'comment':
+        setComment(value);
+        break;
+
+      default:
+        return;
+    }
   };
-  const initialValuesInCome = {
-    price: '',
-    selectedDate: null,
-    comment: '',
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const newTransaction = {
+      price,
+      date: selectedDate,
+      comment,
+    };
+
+    dispatch(addTransaction(newTransaction));
+    setPrice('');
+    setSelectedDate(new Date());
+    setComment('');
   };
+
   return (
-    <div>
-      <Formik
-        initialValues={initialValuesInCome}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}
-      >
-        {({ values, handleChange, setFieldValue, isSubmitting }) => (
-          <Form>
-            <FastField
-              type="number"
-              placeholder="0.00"
-              id="price"
-              name="price"
-              value={values.price}
-              onChange={handleChange}
-            />
+    <form onSubmit={handleSubmit}>
+      <label>
+        Price
+        <input
+          type="number"
+          name="price"
+          value={price}
+          onChange={handleChange}
+          required
+        />
+      </label>
 
-            <DateTime
-              dateFormat="DD-MM-YYYY"
-              timeFormat={false}
-              onChange={handleDateChange}
-              value={selectedDate}
-              id="date"
-              name="date"
-              className={css.dateTime}
-            />
+      <label>
+        Date
+        <input
+          type="date"
+          name="date"
+          value={selectedDate}
+          onChange={handleChange}
+          required
+        />
+      </label>
 
-            <FastField
-              placeholder="Comment"
-              id="comment"
-              name="comment"
-              multiline
-              rows={4}
-              value={values.comment}
-              onChange={handleChange}
-            />
+      <label>
+        Comment
+        <textarea
+          name="comment"
+          value={comment}
+          onChange={handleChange}
+          rows="4"
+        />
+      </label>
 
-            <div>
-              <button type="submit" disabled={isSubmitting}>
-                ADD
-              </button>
-
-              <button type="button" onClick={onCancel}>
-                CANCEL
-              </button>
-            </div>
-          </Form>
-        )}
-      </Formik>
-    </div>
+      <button type="submit">Add Transaction</button>
+    </form>
   );
 }
 
 function FormExpense({ onCancel }) {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (values, formikHelpers) => {
+    const { resetForm, setSubmitting } = formikHelpers;
+
+    const newTransaction = {
+      category: values.category,
+      price: values.price,
+      date: values.date,
+      comment: values.comment,
+    };
+
+    try {
+      await dispatch(addTransaction(newTransaction));
+      resetForm();
+    } catch (error) {
+      console.error('Transaction submission error:', error);
+    }
+    setSubmitting(false);
+  };
 
   const handleDateChange = date => {
     setSelectedDate(date);
@@ -111,6 +260,7 @@ function FormExpense({ onCancel }) {
     'Education',
     'Leisure',
   ];
+
   return (
     <div className={css.modalForm}>
       <Formik
@@ -177,7 +327,15 @@ const Modal = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+  const handleSubmitIncome = (values, { resetForm, setSubmitting }) => {
+    // Tutaj umieść logikę dodawania transakcji do backendu
+    console.log('Adding income transaction:', values);
+    // Możesz również dodać dispatch tutaj, jeśli potrzebujesz
+    // dispatch(addTransaction(values));
 
+    resetForm();
+    setSubmitting(false);
+  };
   return (
     <div>
       <button className={css.addButton} type="button" onClick={handleOpenModal}>
@@ -202,7 +360,10 @@ const Modal = () => {
               <p className={css.switchtext}>Expense</p>
             </span>
             {showIncomeForm ? (
-              <FormIncome onCancel={handleCloseModal} />
+              <FormIncome
+                onCancel={handleCloseModal}
+                handleSubmit={handleSubmitIncome}
+              />
             ) : (
               <FormExpense onCancel={handleCloseModal} />
             )}
