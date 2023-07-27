@@ -9,8 +9,8 @@ import { Suspense } from 'react';
 import { Loader } from './Loader/Loader';
 import { DashboardPage } from '../pages/DashboardPage/DashboardPage';
 
-// const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
-const LoginForm = lazy(() => import('../components/LoginForm/LoginForm'));
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+// const LoginForm = lazy(() => import('../components/LoginForm/LoginForm'));
 
 const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
@@ -31,8 +31,8 @@ export const App = () => {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<RegistrationPage />} />
-          {/* <Route path="/login" element={<LoginPage />} /> */}
-          <Route path="/login" element={<LoginForm />} />
+          <Route path="/login" element={<LoginPage />} />
+          {/* <Route path="/login" element={<LoginForm />} /> */}
           {/* <Route path="/" element={<Header />} /> */}
           <Route
             path="/home"
