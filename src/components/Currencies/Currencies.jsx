@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import css from './currencies.module.css';
+import axios from 'axios';
 
-export const CurrencyTable = ({ currencies }) => {
-  currencies = [
-    { currency: 'USD', purchase: '27.55', sale: '27.65' },
-    { currency: 'EUR', purchase: '30.00', sale: '30.10' },
-  ];
+export const CurrencyTable = () => {
+  // currencies = [
+  //   { currency: 'USD', purchase: '27.55', sale: '27.65' },
+  //   { currency: 'EUR', purchase: '30.00', sale: '30.10' },
+  // ];
+
+  const [currencies, setCurrencies] = useState({});
+
+  useEffect(() => {
+    const fetchCurrencies = async () => {
+      try {
+        const response = await axios.get(
+          'https://api.currencyapi.com/v3/latest?apikey=cur_live_uXxuu8XbnBZWLK3C9wx21MDeS9fitr8Wy3pKfp9w'
+        );
+        const currenciesData = response.data.data;
+        setCurrencies(currenciesData);
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+    fetchCurrencies();
+  }, []);
+
+  const currencyRound = value => {
+    return value.toFixed(2);
+  };
+
+  const currencySaleCounter = value => {
+    return (value - value * 0.05).toFixed(2);
+  };
 
   return (
     <div className={css.CurrenciesTableContainer}>
@@ -46,13 +72,27 @@ export const CurrencyTable = ({ currencies }) => {
           </tr>
         </thead>
         <tbody>
-          {currencies.map(currencyData => (
-            <tr key={currencyData.currency}>
-              <td>{currencyData.currency}</td>
-              <td>{currencyData.purchase}</td>
-              <td>{currencyData.sale}</td>
+          {currencies.PLN?.code && (
+            <tr key={currencies.PLN.code}>
+              <td>{currencies.PLN.code}</td>
+              <td>{currencyRound(currencies.PLN.value)}</td>
+              <td>{currencySaleCounter(currencies.PLN.value)}</td>
             </tr>
-          ))}
+          )}
+          {currencies.EUR?.code && (
+            <tr key={currencies.EUR.code}>
+              <td>{currencies.EUR.code}</td>
+              <td>{currencyRound(currencies.EUR.value)}</td>
+              <td>{currencySaleCounter(currencies.EUR.value)}</td>
+            </tr>
+          )}
+          {currencies.USD?.code && (
+            <tr key={currencies.USD.code}>
+              <td>{currencies.USD.code}</td>
+              <td>{currencyRound(currencies.USD.value)}</td>
+              <td>{currencySaleCounter(currencies.USD.value)}</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
