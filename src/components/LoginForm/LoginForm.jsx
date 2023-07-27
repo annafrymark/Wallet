@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import css from './loginForm.module.css';
 import ToRegisterButton from '../../pages/LoginPage';
 import { ReactSVG } from 'react-svg';
