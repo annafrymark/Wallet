@@ -11,7 +11,8 @@ import { DashboardPage } from '../pages/DashboardPage/DashboardPage';
 import { CurrencyTable } from './Currencies/Currencies';
 import { Balance } from './Balance/Balance';
 
-const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+// const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const LoginForm = lazy(() => import('../components/LoginForm/LoginForm'));
 
 const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
@@ -31,7 +32,8 @@ export const App = () => {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<RegistrationPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          {/* <Route path="/login" element={<LoginPage />} /> */}
+          <Route path="/login" element={<LoginForm />} />
           {/* <Route path="/" element={<Header />} /> */}
           <Route path="/home" element={<DashboardPage />}>
             <Route path="diagram" element={<Balance />} />
