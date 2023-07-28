@@ -37,7 +37,7 @@ export const DashboardMenu = ({ activeTab, onTabChange }) => {
           render={() => (
             <li>
               <Link
-                to="currencies"
+                to="/currencies"
                 // onClick={() => onTabChange('currencies')}
                 className={activeTab === 'currencies' ? 'active' : ''}
               >
