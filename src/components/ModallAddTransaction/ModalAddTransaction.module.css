@@ -39,6 +39,9 @@
 .switchButton {
   display: flex;
 }
+.displayForm {
+  display: none;
+}
 .modalForm {
   display: flex;
 }
