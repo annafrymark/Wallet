@@ -16,60 +16,6 @@ const validationSchema = Yup.object().shape({
   category: Yup.string().required('Category is requred'),
 });
 
-// function FormIncome({ onCancel }) {
-//   const dispatch = useDispatch();
-
-//   const handleSubmit = (values, { resetForm }) => {
-//     console.log('FormIncome handleSubmit:', values);
-//     const { price, date, comment } = values;
-
-//     const newTransaction = {
-//       price,
-//       date,
-//       comment,
-//     };
-
-//     dispatch(addTransaction(newTransaction));
-//     resetForm();
-//   };
-
-//   return (
-//     <Formik
-//       initialValues={{
-//         price: '',
-//         date: new Date().toISOString().substr(0, 10),
-//         comment: '',
-//       }}
-//       validationSchema={validationSchema}
-//       onSubmit={handleSubmit}
-//     >
-//       {({ values }) => (
-//         <Form>
-//           <label>
-//             Price
-//             <Field type="number" name="price" required />
-//           </label>
-
-//           <label>
-//             Date
-//             <Field type="date" name="date" required />
-//           </label>
-
-//           <label>
-//             Comment
-//             <Field as="textarea" name="comment" rows="4" />
-//           </label>
-
-//           <button type="submit">ADD</button>
-//           <button type="button" onClick={onCancel}>
-//             Cancel
-//           </button>
-//         </Form>
-//       )}
-//     </Formik>
-//   );
-// }
-
 function FormIncome({ onCancel }) {
   const dispatch = useDispatch();
 
@@ -101,7 +47,7 @@ function FormIncome({ onCancel }) {
     >
       {({ values }) => (
         <Form>
-          <Field className={css.displayForm} as="select" name="category">
+          <Field as="select" name="category">
             <option value="">Select a category</option>
             <option value="Car">Car</option>
             <option value="Main expenses">Main expenses</option>
@@ -207,7 +153,6 @@ function FormExpense({ onCancel }) {
 const Modal = () => {
   const [showModal, setShowModal] = useState(false);
   const [showIncomeForm, setShowIncomeForm] = useState(true);
-  // const dispatch = useDispatch();
 
   const toggleForm = () => {
     setShowIncomeForm(prevShowIncomeFrom => !prevShowIncomeFrom);
@@ -221,32 +166,6 @@ const Modal = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
-  // const handleSubmitIncome = async (values, { resetForm, setSubmitting }) => {
-  //   console.log('handleSubmitIncome called');
-  //   try {
-  //     await dispatch(addTransaction(values));
-  //     console.log('Income transaction successfully added!');
-  //     resetForm();
-  //     setSubmitting(false);
-  //   } catch (error) {
-  //     console.error('Error while adding income transaction:', error);
-  //     setSubmitting(false);
-  //   }
-  // };
-
-  // const handleSubmitExpense = async (values, { resetForm, setSubmitting }) => {
-  //   try {
-  //     await dispatch(addTransaction(values));
-  //     console.log('Expense transaction successfully added!');
-
-  //     resetForm();
-  //     setSubmitting(false);
-  //   } catch (error) {
-  //     console.error('Error while adding expense transaction:', error);
-  //     setSubmitting(false);
-  //   }
-  // };
-
   return (
     <div>
       <button className={css.addButton} type="button" onClick={handleOpenModal}>
