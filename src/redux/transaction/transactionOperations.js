@@ -1,12 +1,16 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = process.env.DB_URI;
+axios.defaults.baseURL = 'http://localhost:4000/api';
 
 export const addTransaction = createAsyncThunk(
   'transaction/addTransaction',
-  async transaction => {
-    const response = await axios.post('/transaction', transaction);
-    return response.data;
+  async (transactionData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/transactions', transactionData);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );

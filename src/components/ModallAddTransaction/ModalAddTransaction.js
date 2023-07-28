@@ -3,12 +3,10 @@ import css from './ModalAddTransaction.module.css';
 import { ReactComponent as Plus } from '../images/plus.svg';
 import { ReactComponent as Close } from '../images/close.svg';
 import Header from 'components/shared/Header';
-import { Formik, Form, FastField } from 'formik';
-import DateTime from 'react-datetime';
+import { Formik, Form, Field } from 'formik';
 import 'react-datetime/css/react-datetime.css';
 import Switch from '@mui/material/Switch';
 import * as Yup from 'yup';
-// import { handleSubmit } from './transactionUtils';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from 'redux/transaction/transactionOperations';
 
@@ -19,302 +17,197 @@ const validationSchema = Yup.object().shape({
 });
 
 // function FormIncome({ onCancel }) {
-//   const [selectedDate, setSelectedDate] = useState(new Date());
 //   const dispatch = useDispatch();
-//   const handleDateChange = date => {
-//     setSelectedDate(date);
-//   };
-//   const initialValuesInCome = {
-//     price: '',
-//     selectedDate: null,
-//     comment: '',
-//   };
 
-//   // const handleFormSubmit = async (values, formikHelpers) => {
-//   //   const { resetForm, setSubmitting } = formikHelpers;
-//   //   const newTransaction = {
-//   //     dispatch,
-//   //     price: values.price,
-//   //     date: values.date,
-//   //     comment: values.comment,
-//   //     type: 'income',
-//   //   };
-
-//   //   try {
-//   //     await dispatch(addTransaction(newTransaction));
-//   //   } catch (error) {
-//   //     console.error('Transaction submission error:', error);
-//   //   }
-//   //   resetForm();
-//   //   setSubmitting(false);
-//   // };
-
-//   const onSubmit = async (values, formikHelpers) => {
-//     const { resetForm, setSubmitting } = formikHelpers;
+//   const handleSubmit = (values, { resetForm }) => {
+//     console.log('FormIncome handleSubmit:', values);
+//     const { price, date, comment } = values;
 
 //     const newTransaction = {
-//       price: values.price,
-//       date: values.date,
-//       comment: values.comment,
+//       price,
+//       date,
+//       comment,
 //     };
 
-//     await dispatch(addTransaction(newTransaction));
-
+//     dispatch(addTransaction(newTransaction));
 //     resetForm();
-//     setSubmitting(false);
 //   };
-
-//   const handleFormSubmit = event => {
-//     event.preventDefault();
-//     formik.submitForm(); // Dodaj tę linię, aby wywołać funkcję onSubmit z Formik
-//   };
-//   const formik = useFormik({
-//     initialValues: initialValuesInCome,
-//     validationSchema: validationSchema,
-//     onSubmit: handleFormSubmit,
-//   });
 
 //   return (
-//     <div>
-//       <Formik
-//         initialValues={formik.initialValues}
-//         validationSchema={formik.validationSchema}
-//         onSubmit={onSubmit}
-//       >
-//         {({ values, handleChange, setFieldValue, isSubmitting }) => (
-//           <Form onSubmit={handleFormSubmit}>
-//             <FastField
-//               type="number"
-//               placeholder="0.00"
-//               id="price"
-//               name="price"
-//               value={values.price}
-//               onChange={handleChange}
-//             />
+//     <Formik
+//       initialValues={{
+//         price: '',
+//         date: new Date().toISOString().substr(0, 10),
+//         comment: '',
+//       }}
+//       validationSchema={validationSchema}
+//       onSubmit={handleSubmit}
+//     >
+//       {({ values }) => (
+//         <Form>
+//           <label>
+//             Price
+//             <Field type="number" name="price" required />
+//           </label>
 
-//             <DateTime
-//               dateFormat="DD-MM-YYYY"
-//               timeFormat={false}
-//               onChange={handleDateChange}
-//               value={selectedDate}
-//               id="date"
-//               name="date"
-//               className={css.dateTime}
-//             />
+//           <label>
+//             Date
+//             <Field type="date" name="date" required />
+//           </label>
 
-//             <FastField
-//               placeholder="Comment"
-//               id="comment"
-//               name="comment"
-//               multiline
-//               rows={4}
-//               value={values.comment}
-//               onChange={handleChange}
-//             />
+//           <label>
+//             Comment
+//             <Field as="textarea" name="comment" rows="4" />
+//           </label>
 
-//             <div>
-//               <button onClick={handleFormSubmit} disabled={isSubmitting}>
-//                 ADD
-//               </button>
-
-//               <button type="button" onClick={onCancel}>
-//                 CANCEL
-//               </button>
-//             </div>
-//           </Form>
-//         )}
-//       </Formik>
-//     </div>
+//           <button type="submit">ADD</button>
+//           <button type="button" onClick={onCancel}>
+//             Cancel
+//           </button>
+//         </Form>
+//       )}
+//     </Formik>
 //   );
 // }
 
 function FormIncome({ onCancel }) {
-  const [price, setPrice] = useState('');
-  const [comment, setComment] = useState('');
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const dispatch = useDispatch();
-  // const handleDateChange = date => {
-  //   setSelectedDate(date);
-  // };
-  // const initialValuesInCome = {
-  //   price: '',
-  //   selectedDate: null,
-  //   comment: '',
-  // };
 
-  const handleChange = event => {
-    const { name, value } = event.target;
-
-    switch (name) {
-      case 'price':
-        setPrice(value);
-        break;
-
-      case 'date':
-        setSelectedDate(value);
-        break;
-
-      case 'comment':
-        setComment(value);
-        break;
-
-      default:
-        return;
-    }
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
+  const handleSubmit = (values, { resetForm }) => {
+    console.log('FormIncome handleSubmit:', values);
+    const { category, price, date, comment } = values;
 
     const newTransaction = {
+      category,
       price,
-      date: selectedDate,
+      date,
       comment,
     };
 
     dispatch(addTransaction(newTransaction));
-    setPrice('');
-    setSelectedDate(new Date());
-    setComment('');
+    resetForm();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Price
-        <input
-          type="number"
-          name="price"
-          value={price}
-          onChange={handleChange}
-          required
-        />
-      </label>
+    <Formik
+      initialValues={{
+        category: '',
+        price: '',
+        date: new Date().toISOString().substr(0, 10),
+        comment: '',
+      }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ values }) => (
+        <Form>
+          <Field className={css.displayForm} as="select" name="category">
+            <option value="">Select a category</option>
+            <option value="Car">Car</option>
+            <option value="Main expenses">Main expenses</option>
+            <option value="Self care">Self care</option>
+            <option value="Child care'">Child care</option>
+            <option value="Household products">Household products</option>
+            <option value="Education">Education</option>
+            <option value="Leisure">Leisure</option>
+          </Field>
 
-      <label>
-        Date
-        <input
-          type="date"
-          name="date"
-          value={selectedDate}
-          onChange={handleChange}
-          required
-        />
-      </label>
+          <label>
+            Price
+            <Field type="number" name="price" required />
+          </label>
 
-      <label>
-        Comment
-        <textarea
-          name="comment"
-          value={comment}
-          onChange={handleChange}
-          rows="4"
-        />
-      </label>
+          <label>
+            Date
+            <Field type="date" name="date" required />
+          </label>
 
-      <button type="submit">Add Transaction</button>
-    </form>
+          <label>
+            Comment
+            <Field as="textarea" name="comment" rows="4" />
+          </label>
+
+          <button type="submit">ADD</button>
+          <button type="button" onClick={onCancel}>
+            Cancel
+          </button>
+        </Form>
+      )}
+    </Formik>
   );
 }
 
 function FormExpense({ onCancel }) {
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const dispatch = useDispatch();
 
-  const handleSubmit = async (values, formikHelpers) => {
-    const { resetForm, setSubmitting } = formikHelpers;
+  const handleSubmit = (values, { resetForm }) => {
+    console.log('FormIncome handleSubmit:', values);
+    const { category, price, date, comment } = values;
 
     const newTransaction = {
-      category: values.category,
-      price: values.price,
-      date: values.date,
-      comment: values.comment,
+      category,
+      price,
+      date,
+      comment,
     };
 
-    try {
-      await dispatch(addTransaction(newTransaction));
-      resetForm();
-    } catch (error) {
-      console.error('Transaction submission error:', error);
-    }
-    setSubmitting(false);
+    dispatch(addTransaction(newTransaction));
+    resetForm();
   };
-
-  const handleDateChange = date => {
-    setSelectedDate(date);
-  };
-
-  const initialValuesExpense = {
-    category: '',
-    price: '',
-    selectedDate: null,
-    comment: '',
-  };
-  const categories = [
-    'Car',
-    'Products',
-    'Main expenses',
-    'Self care',
-    'Child care',
-    'Household products',
-    'Education',
-    'Leisure',
-  ];
 
   return (
-    <div className={css.modalForm}>
-      <Formik
-        initialValues={initialValuesExpense}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}
-      >
-        {({ values, handleChange, setFieldValue, isSubmitting }) => (
-          <Form>
-            <FastField as="select" id="category" name="category">
-              <option value="">Select a category</option>
-              {categories.map(cat => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </FastField>
+    <Formik
+      initialValues={{
+        category: '',
+        price: '',
+        date: new Date().toISOString().substr(0, 10),
+        comment: '',
+      }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ values }) => (
+        <Form>
+          <Field as="select" name="category">
+            <option value="">Select a category</option>
+            <option value="Car">Car</option>
+            <option value="Main expenses">Main expenses</option>
+            <option value="Self care">Self care</option>
+            <option value="Child care'">Child care</option>
+            <option value="Household products">Household products</option>
+            <option value="Education">Education</option>
+            <option value="Leisure">Leisure</option>
+          </Field>
 
-            <FastField
-              type="number"
-              placeholder="0.00"
-              id="price"
-              name="price"
-            />
+          <label>
+            Price
+            <Field type="number" name="price" required />
+          </label>
 
-            <DateTime
-              onChange={handleDateChange}
-              value={selectedDate}
-              dateFormat="DD-MM-YYYY"
-              timeFormat={false}
-            />
+          <label>
+            Date
+            <Field type="date" name="date" required />
+          </label>
 
-            <FastField
-              as="textarea"
-              placeholder="Comment"
-              id="comment"
-              name="comment"
-            />
-            <button type="submit" disabled={isSubmitting}>
-              ADD
-            </button>
-            <button tyle="button" onClick={onCancel}>
-              CANCEL
-            </button>
-          </Form>
-        )}
-      </Formik>
-    </div>
+          <label>
+            Comment
+            <Field as="textarea" name="comment" rows="4" />
+          </label>
+
+          <button type="submit">ADD</button>
+          <button type="button" onClick={onCancel}>
+            Cancel
+          </button>
+        </Form>
+      )}
+    </Formik>
   );
 }
 
 const Modal = () => {
   const [showModal, setShowModal] = useState(false);
   const [showIncomeForm, setShowIncomeForm] = useState(true);
+  // const dispatch = useDispatch();
 
   const toggleForm = () => {
     setShowIncomeForm(prevShowIncomeFrom => !prevShowIncomeFrom);
@@ -322,20 +215,38 @@ const Modal = () => {
 
   const handleOpenModal = () => {
     setShowModal(true);
+    setShowIncomeForm(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
-  const handleSubmitIncome = (values, { resetForm, setSubmitting }) => {
-    // Tutaj umieść logikę dodawania transakcji do backendu
-    console.log('Adding income transaction:', values);
-    // Możesz również dodać dispatch tutaj, jeśli potrzebujesz
-    // dispatch(addTransaction(values));
+  // const handleSubmitIncome = async (values, { resetForm, setSubmitting }) => {
+  //   console.log('handleSubmitIncome called');
+  //   try {
+  //     await dispatch(addTransaction(values));
+  //     console.log('Income transaction successfully added!');
+  //     resetForm();
+  //     setSubmitting(false);
+  //   } catch (error) {
+  //     console.error('Error while adding income transaction:', error);
+  //     setSubmitting(false);
+  //   }
+  // };
 
-    resetForm();
-    setSubmitting(false);
-  };
+  // const handleSubmitExpense = async (values, { resetForm, setSubmitting }) => {
+  //   try {
+  //     await dispatch(addTransaction(values));
+  //     console.log('Expense transaction successfully added!');
+
+  //     resetForm();
+  //     setSubmitting(false);
+  //   } catch (error) {
+  //     console.error('Error while adding expense transaction:', error);
+  //     setSubmitting(false);
+  //   }
+  // };
+
   return (
     <div>
       <button className={css.addButton} type="button" onClick={handleOpenModal}>
@@ -360,12 +271,9 @@ const Modal = () => {
               <p className={css.switchtext}>Expense</p>
             </span>
             {showIncomeForm ? (
-              <FormIncome
-                onCancel={handleCloseModal}
-                handleSubmit={handleSubmitIncome}
-              />
-            ) : (
               <FormExpense onCancel={handleCloseModal} />
+            ) : (
+              <FormIncome onCancel={handleCloseModal} />
             )}
           </div>
         </div>
