@@ -8,6 +8,8 @@ import { RestrictedRoute } from './Routes/RestrictedRoute';
 import { Suspense } from 'react';
 import { Loader } from './Loader/Loader';
 import { DashboardPage } from '../pages/DashboardPage/DashboardPage';
+import { CurrencyTable } from './Currencies/Currencies';
+import { Balance } from './Balance/Balance';
 
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 
@@ -20,7 +22,6 @@ const RegistrationPage = lazy(() =>
 export const App = () => {
   const dispatch = useDispatch();
   // const { isRefreshing } = useAuth();
-
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
@@ -32,14 +33,10 @@ export const App = () => {
           <Route path="/" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
           {/* <Route path="/" element={<Header />} /> */}
-          <Route
-            path="/home"
-            element={
-              <Suspense fallback={<div> Lodaing...</div>}>
-                <RestrictedRoute redirectTo="/" component={<DashboardPage />} />
-              </Suspense>
-            }
-          ></Route>
+          <Route path="/home" element={<DashboardPage />}>
+            <Route path="diagram" element={<Balance />} />
+            <Route path="currencies" element={<CurrencyTable />} />
+          </Route>
         </Routes>
       </Suspense>
     </div>
