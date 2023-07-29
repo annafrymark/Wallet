@@ -1,6 +1,8 @@
 import React from 'react';
 import css from './loginForm.module.css';
-import ToRegisterButton from '../../pages/LoginPage';
+// import ToRegisterButton from '../../pages/LoginPage';
+import ToRegisterButton from '../../pages/LoginPage/ToRegisterButton';
+
 import { ReactSVG } from 'react-svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -9,6 +11,12 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 // import svg from '../../../public/svg';
+import {
+  resetLoginForm,
+  updateLoginEmail,
+  updateLoginPassword,
+} from '../../redux/Slices/session/sessionSlice';
+import { login } from '../../redux/Slices/session/operations';
 
 const userSchema = object({
   email: string().email('Invalid email').required('Email is required'),
@@ -88,15 +96,15 @@ const LoginForm = () => {
       <div className={css.blur}>
         <div className={css['form-container']}>
           <div className={css['title-container']}>
-            <ReactSVG className={css.icon} src="/svg/wallet_icon.svg" />
-            <ReactSVG
-              className={css.text}
-              src="/svg/wallet_text.svg"
-              beforeInjection={svg => {
-                svg.classList.add('css.text');
-              }}
-            />
-          </div>
+              <ReactSVG className={css.icon} src="/svg/wallet_icon.svg" />
+              <ReactSVG
+                className={css.text}
+                src="/svg/wallet_text.svg"
+                beforeInjection={svg => {
+                  svg.classList.add('css.text');
+                }}
+              />
+            </div>
           <form className={css.form} onSubmit={handleSubmit}>
             <div className={css['email-container']}>
               <ReactSVG
