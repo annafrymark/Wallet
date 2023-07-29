@@ -1,6 +1,6 @@
 // import React from 'react';
 import css from './LoginPage.module.css';
-import ToRegisterButton from '../../components/LoginPage/ToRegisterButton';
+import ToRegisterButton from './ToRegisterButton';
 import { ReactSVG } from 'react-svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/Slices/session/operations';

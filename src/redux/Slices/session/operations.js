@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+require ('dotenv').config();
 
-//const SERVER_URL = ''; Proszę wprowadzic nasz server_url, nie znalazlem 
+//const SERVER_URL = ''; server_url wpliku.env
+const REACT_APP_SERVER_URL = process.env.SERVER_URL;
+
 
 // Utility to add JWT
 const setAuthHeader = token => {
@@ -17,7 +20,10 @@ const clearAuthHeader = () => {
 const signUp = createAsyncThunk('users/signup', async (credentials, thunkAPI) => {
     const progressToast = toast.loading('Signing up...');
     try {
-        const res = await axios.post(`${SERVER_URL}/users/auth/sign-up`, credentials);
+        const res = await axios.post(
+          `${REACT_APP_SERVER_URL}/users/auth/sign-up`,
+          credentials
+        );
         const user = res.data.data.newUser;
 
         toast.update(progressToast, {
@@ -42,7 +48,10 @@ const signUp = createAsyncThunk('users/signup', async (credentials, thunkAPI) =>
 const login = createAsyncThunk('users/login', async (credentials, thunkAPI) => {
     const progressToast = toast.loading('Logging in...');
     try {
-        const res = await axios.post(`${SERVER_URL}/users/auth/log-in`, credentials);
+        const res = await axios.post(
+          `${REACT_APP_SERVER_URL}/users/auth/log-in`,
+          credentials
+        );
         const user = res.data.data;
 
         setAuthHeader(user.token);
@@ -68,7 +77,7 @@ const logOut = createAsyncThunk('users/logout', async (_, thunkAPI) => {
     const progressToast = toast.loading('Logging out...');
 
     try {
-        await axios.post(`${SERVER_URL}/users/auth/log-out`);
+        await axios.post(`${REACT_APP_SERVER_URL}/users/auth/log-out`);
         clearAuthHeader();
         toast.update(progressToast, {
             render: 'See you soon 😴',
@@ -100,11 +109,14 @@ const refreshUser = createAsyncThunk('users/currentUser', async (_, thunkAPI) =>
 
     setAuthHeader(token);
     try {
-        const response = await axios.get(`${SERVER_URL}/users/current`, {
+        const response = await axios.get(
+          `${REACT_APP_SERVER_URL}/users/current`,
+          {
             headers: {
-                Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${token}`,
             },
-        });
+          }
+        );
 
         const user = response.data;
 
@@ -121,7 +133,9 @@ const verifyUserEmail = createAsyncThunk(
     'users/verifyEmail',
     async (verificationToken, thunkAPI) => {
         try {
-            const res = await axios.get(`${SERVER_URL}/users/verify/${verificationToken}`);
+            const res = await axios.get(
+              `${REACT_APP_SERVER_URL}/users/verify/${verificationToken}`
+            );
             return res.data;
         } catch (e) {
             thunkAPI.rejectWithValue(e.message);
@@ -134,7 +148,10 @@ const resendEmailVerification = createAsyncThunk(
     async (email, thunkAPI) => {
         const progressToast = toast.loading('Resending...');
         try {
-            const res = await axios.post(`${SERVER_URL}/users/verify`, { email });
+            const res = await axios.post(
+              `${REACT_APP_SERVER_URL}/users/verify`,
+              { email }
+            );
             toast.update(progressToast, {
                 render: 'Sent! 📨',
                 type: 'success',
@@ -156,7 +173,9 @@ const resendEmailVerification = createAsyncThunk(
 
 const signOut = createAsyncThunk('users/signOut', async (_, thunkAPI) => {
     try {
-        const res = await axios.delete(`${SERVER_URL}/users/auth/sign-out`);
+        const res = await axios.delete(
+          `${REACT_APP_SERVER_URL}/users/auth/sign-out`
+        );
         return res.data;
     } catch (e) {
         return thunkAPI.rejectWithValue(e.message);
