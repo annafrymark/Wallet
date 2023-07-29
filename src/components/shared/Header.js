@@ -2,8 +2,8 @@ import React from 'react';
 import css from './Header.module.css';
 // import wallet from '../images/wallet.png';
 // import exit from '../images/exit.png';
-import { ReactComponent as Wallet } from '../images/wallet.svg';
-import { ReactComponent as Exit } from '../images/exit.svg';
+import { ReactComponent as Wallet } from '../../utils/images/wallet.svg';
+import { ReactComponent as Exit } from '../../utils/images/exit.svg';
 
 const Header = () => {
   return (
