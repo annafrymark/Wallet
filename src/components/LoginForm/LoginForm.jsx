@@ -1,6 +1,5 @@
 import React from 'react';
 import css from './loginForm.module.css';
-// import ToRegisterButton from '../../pages/LoginPage';
 import ToRegisterButton from '../../pages/LoginPage/ToRegisterButton';
 
 import { ReactSVG } from 'react-svg';
@@ -96,15 +95,15 @@ const LoginForm = () => {
       <div className={css.blur}>
         <div className={css['form-container']}>
           <div className={css['title-container']}>
-              <ReactSVG className={css.icon} src="/svg/wallet_icon.svg" />
-              <ReactSVG
-                className={css.text}
-                src="/svg/wallet_text.svg"
-                beforeInjection={svg => {
-                  svg.classList.add('css.text');
-                }}
-              />
-            </div>
+            <ReactSVG className={css.icon} src="/svg/wallet_icon.svg" />
+            <ReactSVG
+              className={css.text}
+              src="/svg/wallet_text.svg"
+              beforeInjection={svg => {
+                svg.classList.add('css.text');
+              }}
+            />
+          </div>
           <form className={css.form} onSubmit={handleSubmit}>
             <div className={css['email-container']}>
               <ReactSVG
