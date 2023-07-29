@@ -13,7 +13,9 @@ export const TransactionsList = ({ transactions }) => {
             <th>Category</th>
             <th>Comment</th>
             <th>Sum</th>
-            <th> </th>
+            <th>
+              <span style={{ visibility: 'collapse' }}>Buttons</span>
+            </th>
           </tr>
         </thead>
         <tbody>
