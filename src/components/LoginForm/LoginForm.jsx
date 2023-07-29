@@ -28,9 +28,28 @@ const userSchema = object({
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isAuth = useSelector(state => state.session.isAuth);
-  const email = useSelector(state => state.session.loginForm.email);
-  const password = useSelector(state => state.session.loginForm.password);
+
+  // FIXME:
+
+  console.log(
+    'Added by Dawid: This is state: ',
+    useSelector(state => state)
+  );
+
+  // const isAuth = useSelector(state => state.session.isAuth);
+  console.log(
+    'Added by Dawid: isAuth: ',
+    useSelector(state => state.auth)
+  );
+  const isAuth = useSelector(state => state.auth.isAuth);
+
+  // const email = useSelector(state => state.session.loginForm.email);
+  console.log(
+    'Added by Dawid: email: ',
+    useSelector(state => state.auth.user.email)
+  );
+
+  // const password = useSelector(state => state.session.loginForm.password);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleEmailChange = event => {
@@ -55,10 +74,15 @@ const LoginForm = () => {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(event.currentTarget);
+
+    // console.log(data.get('email'));
+    // console.log(data.get('password'));
+
     const formValidationData = {
       email: data.get('email'),
       password: data.get('password'),
     };
+
     try {
       await userSchema.validate(formValidationData, { abortEarly: false });
       const response = await dispatch(
@@ -116,7 +140,7 @@ const LoginForm = () => {
                 id="email"
                 name="email"
                 placeholder="E-mail"
-                value={email}
+                // value={email}
                 onChange={handleEmailChange}
                 required
               ></input>
@@ -137,7 +161,7 @@ const LoginForm = () => {
                 id="password"
                 name="password"
                 placeholder="Password"
-                value={password}
+                // value={password}
                 onChange={handlePasswordChange}
                 required
               ></input>
