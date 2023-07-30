@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import css from './Header.module.css';
 // import wallet from '../images/wallet.png';
 // import exit from '../images/exit.png';
 import { ReactComponent as Wallet } from '../images/wallet.svg';
 import { ReactComponent as Exit } from '../images/exit.svg';
+import ModalLogout from 'components/ModalLogout/ModalLogout';
 
 const Header = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleLogout = () => {
+    setShowModal(true);
+  };
+
   return (
     <header className={css.header}>
       <h1 className={css.title}>
@@ -20,8 +27,12 @@ const Header = () => {
         </button>
         <p className={css.border}>|</p>
         <div className={css.buttonExitContainer}>
-          <Exit />
-          <button type="button" className={css.buttonExit}>
+          {showModal && <ModalLogout setShowModal={setShowModal} />}
+          <button
+            type="button"
+            className={css.buttonExit}
+            onClick={handleLogout}
+          >
             Exit
           </button>
         </div>
