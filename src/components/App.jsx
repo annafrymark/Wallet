@@ -30,8 +30,8 @@ export const App = () => {
     <div>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<RegistrationPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/register" element={<RegistrationPage />} />
           {/* <Route path="/" element={<Header />} /> */}
           <Route path="/home" element={<DashboardPage />}>
             <Route path="diagram" element={<Balance />} />

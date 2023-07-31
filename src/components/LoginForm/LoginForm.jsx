@@ -1,149 +1,171 @@
-// import React from 'react';
-import css from './LoginForm.module.css';
-import ToRegisterButton from '../../components/LoginPage/ToRegisterButton';
-import { ReactSVG } from 'react-svg';
-import { useDispatch, useSelector } from 'react-redux';
-import { object, string } from 'yup';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import React from 'react';
+import { Field, Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import EmailIcon from '@mui/icons-material/Email';
+import LockIcon from '@mui/icons-material/Lock';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import logo from '../../utils/images/wallet-icon.png';
+import css from '../RegistrationForm/registrationForm.module.css';
+import { logIn } from 'redux/auth/authOperations';
 
-
-const userSchema = object({
-  email: string().email('Invalid email').required('Email is required'),
-  password: string()
-    .min(6, 'Password must be at least 6 characters')
-    .max(12, 'Password can not be longer than 12 characters')
-    .required('Password is required'),
+const userSchema = Yup.object({
+  email: Yup.string()
+    .email('Invalid e-mail.')
+    .required('E-mail is required.')
+    .matches(/^\w+[\w-.]*\w@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/, 'Invalid email.'),
+  password: Yup.string()
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,12}$/,
+      'Password must contain 6 - 12 characters: one uppercase, one lowercase, one number and one special character.'
+    )
+    .required('Password is required.'),
 });
 
-const LoginPage = () => {
+const LoginForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isAuth = useSelector(state => state.session.isAuth);
-  const email = useSelector(state => state.session.loginForm.email);
-  const password = useSelector(state => state.session.loginForm.password);
+  const navigate = useNavigate(); // eslint-disable-next-line
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleEmailChange = event => {
-    dispatch(updateLoginEmail(event.target.value));
-  };
-  const togglePasswordVisibility = () => {
+  const handlePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  const handlePasswordChange = event => {
-    dispatch(updateLoginPassword(event.target.value));
-  };
-  const handleLoginFormReset = () => {
-    dispatch(resetLoginForm());
-  };
-  useEffect(() => {
-    if (isAuth) {
-      navigate('/home');
-    }
-  }, [isAuth, navigate]);
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault();
+
     const form = event.currentTarget;
-    const data = new FormData(event.currentTarget);
-    const formValidationData = {
-      email: data.get('email'),
-      password: data.get('password'),
-    };
-    try {
-      await userSchema.validate(formValidationData, { abortEarly: false });
-      const response = await dispatch(
-        login({
-          email: data.get('email'),
-          password: data.get('password'),
-        })
-      );
-      if (response.meta.requestStatus === 'fulfilled') {
-        form.reset();
-        handleLoginFormReset();
-      }
-    } catch (error) {
-      error.inner.forEach(validationError => {
-        toast.warn(validationError.message, {
-          position: 'top-right',
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-        });
-      });
-    }
+    const email = form.elements.email.value;
+    const password = form.elements.password.value;
+
+    dispatch(logIn({ email, password }));
+
+    navigate('/register');
+    form.reset();
   };
 
   return (
-    <div className={css.container}>
-      <ReactSVG className={css.peach} src="/svg/ellipse_peach.svg" />
-      <ReactSVG className={css.violet} src="/svg/ellipse_violet.svg" />
-      <ReactSVG className={css.man} src="/svg/picture_with_man.svg" />
-      <p className={css.name}>Finance App</p>
-      <div className={css.blur}>
-        <div className={css['form-container']}>
-          <div className={css['title-container']}>
-            <ReactSVG className={css.icon} src="/svg/wallet_icon.svg" />
-            <ReactSVG
-              className={css.text}
-              src="/svg/wallet_text.svg"
-              beforeInjection={svg => {
-                svg.classList.add('css.text');
-              }}
-            />
-          </div>
-          <form className={css.form} onSubmit={handleSubmit}>
-            <div className={css['email-container']}>
-              <ReactSVG
-                className={css['email-icon']}
-                src="/svg/email_icon.svg"
-              />
-              <input
-                className={css.email}
-                type="text"
-                id="email"
-                name="email"
-                placeholder="E-mail"
-                value={email}
-                onChange={handleEmailChange}
-                required
-              ></input>
+    <Formik
+      initialValues={{ email: '', password: '' }}
+      validationSchema={userSchema}
+      validateOnBlur
+    >
+      {({ values, handleBlur, isValid, touched, dirty, errors }) => (
+        <div className={css.Container}>
+          <Form className={css.Form} onSubmit={event => handleSubmit(event)}>
+            <div className={css.LogoContainer}>
+              <img className={css.Logo} alt="Logo" src={logo} />
+              <h1 className={css.Title}>Wallet</h1>
             </div>
-            <div className={css['password-container']}>
-              <ReactSVG
-                className={css['password-icon']}
-                src="/svg/lock_icon.svg"
+            <label className={css.Field}>
+              {touched.email && errors.email ? (
+                <p
+                  style={{
+                    color: '#ff6596',
+                    position: 'absolute',
+                    bottom: '-30px',
+                    left: '0',
+                    fontFamily: 'Poppins',
+                    fontSize: '13px',
+                  }}
+                >
+                  {errors.email}
+                </p>
+              ) : null}
+
+              <EmailIcon
+                className={css.InputIcon}
+                style={{ color: '#e0e0e0' }}
               />
-              <ReactSVG
-                className={css['hide-password-icon']}
-                onClick={togglePasswordVisibility}
-                src={showPassword ? '/svg/eye.svg' : '/svg/eye-blocked.svg'}
+              <Field
+                className={css.Input}
+                type="text"
+                name="email"
+                id="email"
+                placeholder="E-mail"
+                value={values.email}
+                onBlur={handleBlur}
+                autoComplete="off"
               />
-              <input
-                className={css.password}
+            </label>
+            <label className={css.Field}>
+              {touched.password && errors.password ? (
+                <p
+                  style={{
+                    color: '#ff6596',
+                    position: 'absolute',
+                    bottom: '-30px',
+                    left: '0',
+                    fontFamily: 'Poppins',
+                    fontSize: '13px',
+                  }}
+                >
+                  {errors.password}
+                </p>
+              ) : null}
+
+              <LockIcon
+                className={css.InputIcon}
+                style={{ color: '#e0e0e0' }}
+              />
+              <Field
+                className={css.Input}
                 type={showPassword ? 'text' : 'password'}
-                id="password"
                 name="password"
                 placeholder="Password"
-                value={password}
-                onChange={handlePasswordChange}
-                required
-              ></input>
-            </div>
+                id="password"
+                value={values.password}
+                onBlur={handleBlur}
+                autoComplete="new-password"
+              />
+              <span
+                onClick={handlePasswordVisibility}
+                className={css.PasswordVisibilityToggle}
+              >
+                {showPassword ? (
+                  <VisibilityOffIcon style={{ color: '#e0e0e0' }} />
+                ) : (
+                  <VisibilityIcon style={{ color: '#e0e0e0' }} />
+                )}
+              </span>
+            </label>
+            <label className={css.Field}>
+              {touched.confirmPassword && errors.confirmPassword ? (
+                <p
+                  style={{
+                    color: '#ff6596',
+                    position: 'absolute',
+                    bottom: '-30px',
+                    left: '0',
+                    fontFamily: 'Poppins',
+                    fontSize: '13px',
+                  }}
+                >
+                  {errors.confirmPassword}
+                </p>
+              ) : null}
+            </label>
 
-            <button className={css.btn} type="submit">
-              Log in
-            </button>
-          </form>
-          <ToRegisterButton />
+            <div className={css.ButtonContainer}>
+              <button type="submit" className={css.ButtonPrimary}>
+                Log in
+              </button>
+
+              <Link to="/register">
+                <button type="button" className={css.ButtonSecondary}>
+                  Register
+                </button>
+              </Link>
+            </div>
+          </Form>
         </div>
-      </div>
-    </div>
+      )}
+    </Formik>
   );
 };
 
-export default LoginPage;
+export default LoginForm;
