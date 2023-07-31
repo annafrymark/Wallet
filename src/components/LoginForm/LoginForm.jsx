@@ -148,11 +148,6 @@ const LoginForm = () => {
                   {errors.confirmPassword}
                 </p>
               ) : null}
-
-              <LockIcon
-                className={css.InputIcon}
-                style={{ color: '#e0e0e0' }}
-              />
             </label>
 
             <div className={css.ButtonContainer}>
