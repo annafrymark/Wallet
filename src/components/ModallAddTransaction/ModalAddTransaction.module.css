@@ -136,7 +136,15 @@
 .switchtext {
   color: #e0e0e0;
 }
-
+.formatDate {
+  margin-top: 40px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  width: 90%;
+  padding: 18px;
+  font-size: 15px;
+  resize: none;
+}
 .switchEdit {
   background-color: none;
   color: #ffffff;
