@@ -31,19 +31,19 @@ export const App = () => {
       <Modal />
       Project Wallet Group 6
       <Suspense fallback={<div> Lodaing...</div>}>
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<RegistrationPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          {/* <Route path="/" element={<Header />} /> */}
-          <Route
+          <Route path="/login" element={<LoginPage />} /> */}
+        {/* <Route path="/" element={<Header />} /> */}
+        {/* <Route
             path="/home"
             element={
               <Suspense fallback={<div> Lodaing...</div>}>
                 <RestrictedRoute redirectTo="/" component={<DashboardPage />} />
               </Suspense>
             }
-          ></Route>
-        </Routes>
+          ></Route> */}
+        {/* </Routes> */}
       </Suspense>
     </div>
   );

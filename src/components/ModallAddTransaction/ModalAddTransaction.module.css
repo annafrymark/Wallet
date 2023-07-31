@@ -39,12 +39,54 @@
 .switchButton {
   display: flex;
 }
-.displayForm {
-  display: none;
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .modalForm {
   display: flex;
 }
+.inputForm {
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  width: 80%;
+  margin-top: 40px;
+  padding: 18px;
+}
+.inputFormComment {
+  margin-top: 40px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  width: 80%;
+  padding: 18px;
+  resize: none;
+}
+
+.buttonADD {
+  border: none;
+  padding: 20px;
+  background-color: #24cca7;
+  width: 92%;
+  border-radius: 30px;
+  color: #ffffff;
+  font-size: 15px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.buttonCancel {
+  border: 1px SOLID #4a56e2;
+  padding: 20px;
+  background-color: #ffffff;
+  width: 92%;
+  border-radius: 30px;
+  color: #4a56e2;
+  font-size: 15px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
 .closebutton {
   cursor: pointer;
   font-size: 20px;
