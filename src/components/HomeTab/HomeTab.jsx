@@ -1,6 +1,6 @@
 import { Balance } from '../Balance/Balance';
 import { CurrencyTable } from '../Currencies/Currencies';
-import { DashboardMenu } from '..//DashboardMenu/DashboardMenu';
+import { Navigation } from '../Navigation/Navigation';
 
 import css from './homeTab.module.css';
 
@@ -9,7 +9,7 @@ export const HomeTab = () => {
     <div className={css.HomeTab}>
       <div className={css.Container}>
         <div className={css.LeftSide}>
-          <DashboardMenu />
+          <Navigation />
           <Balance />
         </div>
         <div className={css.CurrencyContainer}>
