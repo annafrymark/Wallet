@@ -9,7 +9,8 @@ import { Suspense } from 'react';
 import { Loader } from './Loader/Loader';
 import { DashboardPage } from '../pages/DashboardPage/DashboardPage';
 import { CurrencyTable } from './Currencies/Currencies';
-import { Balance } from './Balance/Balance';
+// import { Balance } from './Balance/Balance';
+import { Diagram } from './DashBoard/Statistics/Diagram';
 
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 
@@ -34,7 +35,7 @@ export const App = () => {
           <Route path="/register" element={<RegistrationPage />} />
           {/* <Route path="/" element={<Header />} /> */}
           <Route path="/home" element={<DashboardPage />}>
-            <Route path="diagram" element={<Balance />} />
+            <Route path="diagram" element={<Diagram />} />
             <Route path="currencies" element={<CurrencyTable />} />
           </Route>
         </Routes>
