@@ -10,7 +10,8 @@ import { useDispatch } from 'react-redux';
 import { addTransaction } from 'redux/transaction/transactionOperations';
 import 'react-datetime/css/react-datetime.css';
 import DateTime from 'react-datetime';
-import SwitchButton from './switchButton';
+// import SwitchButton from './switchButton';
+// import { BorderBottom } from '@mui/icons-material';
 
 function FormIncome({ onCancel }) {
   const dispatch = useDispatch();
@@ -60,6 +61,15 @@ function FormIncome({ onCancel }) {
             timeFormat={false}
             inputProps={{
               required: true,
+              style: {
+                border: 'none',
+                borderBottom: `1px solid #e0e0e0`,
+                width: '90%',
+                marginTop: '20px',
+                fontSize: '15px',
+                padding: '18px',
+                outline: 'none',
+              },
             }}
           />
 
@@ -145,6 +155,15 @@ function FormExpense({ onCancel }) {
             timeFormat={false}
             inputProps={{
               required: true,
+              style: {
+                border: 'none',
+                borderBottom: `1px solid #e0e0e0`,
+                width: '90%',
+                marginTop: '20px',
+                fontSize: '15px',
+                padding: '18px',
+                outline: 'none',
+              },
             }}
           />
 
