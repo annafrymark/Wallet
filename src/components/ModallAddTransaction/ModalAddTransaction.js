@@ -9,22 +9,24 @@ import Switch from '@mui/material/Switch';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from 'redux/transaction/transactionOperations';
-
-const validationSchema = Yup.object().shape({
-  price: Yup.number().required('Price is required'),
-  date: Yup.date().required('Date is required'),
-  category: Yup.string().required('Category is requred'),
-});
+import 'react-datetime/css/react-datetime.css';
+// import DateTime from 'react-datetime';
+import DateTimePicker from '/packages/x-date-pickers/src/DateTimePicker';
 
 function FormIncome({ onCancel }) {
   const dispatch = useDispatch();
+  const [value, setValue] = useState(new Date());
+
+  const validationSchema = Yup.object().shape({
+    price: Yup.number().required('Price is required'),
+    date: Yup.date().required('Date is required'),
+  });
 
   const handleSubmit = (values, { resetForm }) => {
     console.log('FormIncome handleSubmit:', values);
-    const { category, price, date, comment } = values;
+    const { price, date, comment } = values;
 
     const newTransaction = {
-      category,
       price,
       date,
       comment,
@@ -37,9 +39,8 @@ function FormIncome({ onCancel }) {
   return (
     <Formik
       initialValues={{
-        category: '',
         price: '',
-        date: new Date().toISOString().substr(0, 10),
+        date: new Date(),
         comment: '',
       }}
       validationSchema={validationSchema}
@@ -47,35 +48,42 @@ function FormIncome({ onCancel }) {
     >
       {({ values }) => (
         <Form>
-          <Field as="select" name="category">
-            <option value="">Select a category</option>
-            <option value="Car">Car</option>
-            <option value="Main expenses">Main expenses</option>
-            <option value="Self care">Self care</option>
-            <option value="Child care'">Child care</option>
-            <option value="Household products">Household products</option>
-            <option value="Education">Education</option>
-            <option value="Leisure">Leisure</option>
-          </Field>
+          <Field
+            className={css.inputForm}
+            placeholder="0.00"
+            type="number"
+            name="price"
+            required
+          />
 
-          <label>
-            Price
-            <Field type="number" name="price" required />
-          </label>
+          {/* <DateTime
+            value={values.date}
+            dateFormat="YYYY-MM-DD"
+            timeFormat={false}
+            inputProps={{
+              required: true,
+            }}
+          /> */}
+          <DateTimePicker
+            label="Uncontrolled picker"
+            defaultValue={setValue}
+            views={['year', 'month', 'day']}
+            value={value}
+          />
 
-          <label>
-            Date
-            <Field type="date" name="date" required />
-          </label>
+          <Field
+            className={css.inputFormComment}
+            placeholder="Comment"
+            as="textarea"
+            name="comment"
+            rows="4"
+          />
 
-          <label>
-            Comment
-            <Field as="textarea" name="comment" rows="4" />
-          </label>
-
-          <button type="submit">ADD</button>
-          <button type="button" onClick={onCancel}>
-            Cancel
+          <button className={css.buttonADD} type="submit">
+            ADD
+          </button>
+          <button className={css.buttonCancel} type="button" onClick={onCancel}>
+            CANCEL
           </button>
         </Form>
       )}
@@ -86,6 +94,12 @@ function FormIncome({ onCancel }) {
 function FormExpense({ onCancel }) {
   const dispatch = useDispatch();
 
+  const validationSchema = Yup.object().shape({
+    price: Yup.number().required('Price is required'),
+    date: Yup.date().required('Date is required'),
+    category: Yup.string().required('Category is requred'),
+  });
+
   const handleSubmit = (values, { resetForm }) => {
     console.log('FormIncome handleSubmit:', values);
     const { category, price, date, comment } = values;
@@ -106,7 +120,7 @@ function FormExpense({ onCancel }) {
       initialValues={{
         category: '',
         price: '',
-        date: new Date().toISOString().substr(0, 10),
+        date: new Date(),
         comment: '',
       }}
       validationSchema={validationSchema}
@@ -125,20 +139,18 @@ function FormExpense({ onCancel }) {
             <option value="Leisure">Leisure</option>
           </Field>
 
-          <label>
-            Price
-            <Field type="number" name="price" required />
-          </label>
+          <Field placeholder="0.00" type="number" name="price" required />
 
-          <label>
-            Date
-            <Field type="date" name="date" required />
-          </label>
+          {/* <DateTime
+            value={values.date}
+            dateFormat="YYYY-MM-DD"
+            timeFormat={false}
+            inputProps={{
+              required: true,
+            }}
+          /> */}
 
-          <label>
-            Comment
-            <Field as="textarea" name="comment" rows="4" />
-          </label>
+          <Field placeholder="Comment" as="textarea" name="comment" rows="4" />
 
           <button type="submit">ADD</button>
           <button type="button" onClick={onCancel}>
@@ -181,19 +193,21 @@ const Modal = () => {
             <span className={css.headernone}>
               <Header />
             </span>
-            <h2 className={css.title}>Add transction</h2>
-            <span className={css.switchButton}>
-              <p className={css.switchtext}>Income</p>
-              <Switch defaultChecked onClick={toggleForm}>
-                {showIncomeForm ? 'Income' : 'Expense'}
-              </Switch>
-              <p className={css.switchtext}>Expense</p>
-            </span>
-            {showIncomeForm ? (
-              <FormExpense onCancel={handleCloseModal} />
-            ) : (
-              <FormIncome onCancel={handleCloseModal} />
-            )}
+            <div className={css.formContainer}>
+              <h2 className={css.title}>Add transction</h2>
+              <span className={css.switchButton}>
+                <p className={css.switchtext}>Income</p>
+                <Switch defaultChecked onClick={toggleForm}>
+                  {showIncomeForm ? 'Income' : 'Expense'}
+                </Switch>
+                <p className={css.switchtext}>Expense</p>
+              </span>
+              {showIncomeForm ? (
+                <FormExpense onCancel={handleCloseModal} />
+              ) : (
+                <FormIncome onCancel={handleCloseModal} />
+              )}
+            </div>
           </div>
         </div>
       )}
