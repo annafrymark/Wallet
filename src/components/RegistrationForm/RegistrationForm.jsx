@@ -52,7 +52,7 @@ export const RegisterForm = () => {
         dispatch(register({ email, password, confirmPassword, name, }));
         // console.log('cos cos cos');
         console.log(email, password, confirmPassword, name);
-        navigate('/login');
+        navigate('/');
         form.reset();
     };
 
