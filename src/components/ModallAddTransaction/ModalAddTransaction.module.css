@@ -47,20 +47,42 @@
 .modalForm {
   display: flex;
 }
+.inputFormSelect {
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  width: 99%;
+  margin-top: 40px;
+  outline: none;
+  font-size: 15px;
+  padding: 18px;
+}
 .inputForm {
   border: none;
   border-bottom: 1px solid #e0e0e0;
-  width: 80%;
+  width: 90%;
   margin-top: 40px;
+  font-size: 15px;
   padding: 18px;
 }
+.inputForm:hover,
+.inputForm:focus {
+  border-color: #24cca7;
+  outline: none;
+}
+
 .inputFormComment {
   margin-top: 40px;
   border: none;
   border-bottom: 1px solid #e0e0e0;
-  width: 80%;
+  width: 90%;
   padding: 18px;
+  font-size: 15px;
   resize: none;
+}
+.inputFormComment:hover,
+.inputFormComment:focus {
+  border-color: #24cca7;
+  outline: none;
 }
 
 .form-control {
@@ -77,6 +99,7 @@
   font-size: 15px;
   margin-top: 20px;
   cursor: pointer;
+  margin-left: 15px;
 }
 
 .buttonCancel {
@@ -84,6 +107,7 @@
   padding: 20px;
   background-color: #ffffff;
   width: 92%;
+  margin-left: 15px;
   border-radius: 30px;
   color: #4a56e2;
   font-size: 15px;
@@ -113,16 +137,17 @@
   color: #e0e0e0;
 }
 
-.dateTime {
-  border: none;
-  padding: 10px;
+.switchEdit {
+  background-color: none;
+  color: #ffffff;
+  box-shadow: none;
 }
 
 @media (min-width: 768px) {
   .modalcontent {
     padding: 20px;
-    width: 30%;
-    height: 30%;
+    width: 40%;
+    height: 73%;
   }
   .closebutton {
     display: flex;
@@ -130,5 +155,12 @@
   }
   .headernone {
     display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .modalcontent {
+    width: 35%;
+    height: 72%;
   }
 }

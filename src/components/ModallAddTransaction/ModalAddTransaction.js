@@ -4,13 +4,13 @@ import { ReactComponent as Plus } from '../images/plus.svg';
 import { ReactComponent as Close } from '../images/close.svg';
 import Header from 'components/shared/Header';
 import { Formik, Form, Field } from 'formik';
-// import 'react-datetime/css/react-datetime.css';
 import Switch from '@mui/material/Switch';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from 'redux/transaction/transactionOperations';
 import 'react-datetime/css/react-datetime.css';
 import DateTime from 'react-datetime';
+import SwitchButton from './switchButton';
 
 function FormIncome({ onCancel }) {
   const dispatch = useDispatch();
@@ -120,7 +120,7 @@ function FormExpense({ onCancel }) {
     >
       {({ values }) => (
         <Form>
-          <Field as="select" name="category">
+          <Field className={css.inputFormSelect} as="select" name="category">
             <option value="">Select a category</option>
             <option value="Car">Car</option>
             <option value="Main expenses">Main expenses</option>
@@ -131,7 +131,13 @@ function FormExpense({ onCancel }) {
             <option value="Leisure">Leisure</option>
           </Field>
 
-          <Field placeholder="0.00" type="number" name="price" required />
+          <Field
+            className={css.inputForm}
+            placeholder="0.00"
+            type="number"
+            name="price"
+            required
+          />
 
           <DateTime
             value={values.date}
@@ -142,11 +148,19 @@ function FormExpense({ onCancel }) {
             }}
           />
 
-          <Field placeholder="Comment" as="textarea" name="comment" rows="4" />
+          <Field
+            className={css.inputFormComment}
+            placeholder="Comment"
+            as="textarea"
+            name="comment"
+            rows="4"
+          />
 
-          <button type="submit">ADD</button>
-          <button type="button" onClick={onCancel}>
-            Cancel
+          <button className={css.buttonADD} type="submit">
+            ADD
+          </button>
+          <button className={css.buttonCancel} type="button" onClick={onCancel}>
+            CANCEL
           </button>
         </Form>
       )}
@@ -188,11 +202,30 @@ const Modal = () => {
             <div className={css.formContainer}>
               <h2 className={css.title}>Add transction</h2>
               <span className={css.switchButton}>
-                <p className={css.switchtext}>Income</p>
-                <Switch defaultChecked onClick={toggleForm}>
+                <p
+                  style={{
+                    color: !showIncomeForm ? '#24CCA7' : '',
+                  }}
+                  className="switchText"
+                >
+                  Income
+                </p>
+                <Switch
+                  defaultChecked
+                  checked={showIncomeForm}
+                  className={css.switchEdit}
+                  onClick={toggleForm}
+                >
                   {showIncomeForm ? 'Income' : 'Expense'}
                 </Switch>
-                <p className={css.switchtext}>Expense</p>
+                <p
+                  style={{
+                    color: showIncomeForm ? '#FF6596' : '',
+                  }}
+                  className="switchText"
+                >
+                  Expense
+                </p>
               </span>
               {showIncomeForm ? (
                 <FormExpense onCancel={handleCloseModal} />
