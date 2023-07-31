@@ -38,7 +38,7 @@ const register = createAsyncThunk(
     }
   }
 );
-const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
+const logIn = createAsyncThunk('users/login', async (credentials, thunkAPI) => {
   try {
     const response = await axios.post('/users/login', credentials);
     setAuthHeader(response.data.token);
