@@ -28,7 +28,7 @@ const userSchema = Yup.object({
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // eslint-disable-next-line
-  const [password, setPassword] = useState('');
+  // const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handlePasswordVisibility = () => {
