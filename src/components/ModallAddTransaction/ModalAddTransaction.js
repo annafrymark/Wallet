@@ -4,18 +4,16 @@ import { ReactComponent as Plus } from '../images/plus.svg';
 import { ReactComponent as Close } from '../images/close.svg';
 import Header from 'components/shared/Header';
 import { Formik, Form, Field } from 'formik';
-import 'react-datetime/css/react-datetime.css';
+// import 'react-datetime/css/react-datetime.css';
 import Switch from '@mui/material/Switch';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from 'redux/transaction/transactionOperations';
 import 'react-datetime/css/react-datetime.css';
-// import DateTime from 'react-datetime';
-import DateTimePicker from '/packages/x-date-pickers/src/DateTimePicker';
+import DateTime from 'react-datetime';
 
 function FormIncome({ onCancel }) {
   const dispatch = useDispatch();
-  const [value, setValue] = useState(new Date());
 
   const validationSchema = Yup.object().shape({
     price: Yup.number().required('Price is required'),
@@ -56,19 +54,13 @@ function FormIncome({ onCancel }) {
             required
           />
 
-          {/* <DateTime
+          <DateTime
             value={values.date}
             dateFormat="YYYY-MM-DD"
             timeFormat={false}
             inputProps={{
               required: true,
             }}
-          /> */}
-          <DateTimePicker
-            label="Uncontrolled picker"
-            defaultValue={setValue}
-            views={['year', 'month', 'day']}
-            value={value}
           />
 
           <Field
@@ -141,14 +133,14 @@ function FormExpense({ onCancel }) {
 
           <Field placeholder="0.00" type="number" name="price" required />
 
-          {/* <DateTime
+          <DateTime
             value={values.date}
             dateFormat="YYYY-MM-DD"
             timeFormat={false}
             inputProps={{
               required: true,
             }}
-          /> */}
+          />
 
           <Field placeholder="Comment" as="textarea" name="comment" rows="4" />
 

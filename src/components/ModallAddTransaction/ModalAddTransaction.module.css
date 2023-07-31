@@ -63,6 +63,10 @@
   resize: none;
 }
 
+.form-control {
+  border: none;
+}
+
 .buttonADD {
   border: none;
   padding: 20px;
