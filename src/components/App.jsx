@@ -9,11 +9,11 @@ import { RestrictedRoute } from './Routes/RestrictedRoute';
 import { PrivateRoute } from './Routes/PrivateRoute';
 import { Suspense } from 'react';
 import { Loader } from './Loader/Loader';
-import { DashboardPage } from '../pages/DashboardPage/DashboardPage';
+
 import { CurrencyTable } from './Currencies/Currencies';
 // import { Balance } from './Balance/Balance';
 import { Diagram } from './DashBoard/Statistics/Diagram';
-import Header from './shared/Header';
+
 import Modal from './ModallAddTransaction/ModalAddTransaction';
 import { useAuth } from "hooks/useAuth";
 
@@ -21,6 +21,10 @@ const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 
 const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
+);
+const Header = lazy(() => import('./shared/Header'));
+const DashboardPage = lazy(() =>
+  import('../pages/DashboardPage/DashboardPage')
 );
 
 
@@ -42,7 +46,7 @@ export const App = () => {
           <Route
             path="/"
             element={
-              <RestrictedRoute redirectTo="/home" component={<LoginPage />} />
+              <RestrictedRoute  component={<LoginPage />} />
             }
           />
           <Route
@@ -57,14 +61,16 @@ export const App = () => {
           <Route
             path="/home"
             element={
-              <PrivateRoute component={<DashboardPage />}>
-                <Route path="diagram" element={<Diagram />} />
-                <Route path="currencies" element={<CurrencyTable />} />
+              <PrivateRoute component={<Header/>}>
+                <Route index component= {<DashboardPage />}>
+                <Route path="/diagram" element={<Diagram />} />
+                  {/* <Route path="/currencies" element={<CurrencyTable />} /> */}
+                  </Route>
               </PrivateRoute>
             }
           />
 
-          {/* <Route path="/" element={<Header />} /> */}
+       
           
         </Routes>
       </Suspense>
