@@ -48,12 +48,13 @@ const transactionSlice = createSlice({
         state.balance = calculateBalance(action.payload);
       })
       .addCase(fetchTransactions.rejected, handleRejected)
+
       .addCase(deleteTransaction.pending, handlePending)
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const index = state.items.findIndex(
-          transaction => transaction.id === action.payload.id
+          transaction => transaction.id === action.payload
         );
         state.items.splice(index, 1);
       })
