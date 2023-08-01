@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
- axios.defaults.baseURL = 'http://localhost:4000/api';
+axios.defaults.baseURL = 'http://localhost:4000/api';
 //axios.defaults.baseURL = 'http://localhost:3000/wallet';
 
 function sortTransactionsByDate(transactions) {

@@ -7,8 +7,9 @@ import { fetchTransactions } from '../../redux/transactions/operations';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, Outlet } from 'react-router-dom';
+import { Header } from '../../components/shared/Header';
 
-export const DashboardPage = () => {
+const DashboardPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchTransactions());
@@ -19,21 +20,26 @@ export const DashboardPage = () => {
   console.log(location.pathname);
 
   return (
-    <div className={css.DashboardPageBcg}>
-      <div className={css.test}>
-        <div className={css.DashboardPage}>
-          <div className={css.HomeTabContainer}>
-            <HomeTab />
-          </div>
-          <div className={css.DisplayedElemContainer}>
-            {location.pathname === '/home' ? (
-              <TransactionsList transactions={transactions} />
-            ) : (
-              <Outlet />
-            )}
+    <>
+      <Header />
+      <div className={css.DashboardPageBcg}>
+        <div className={css.test}>
+          <div className={css.DashboardPage}>
+            <div className={css.HomeTabContainer}>
+              <HomeTab />
+            </div>
+            <div className={css.DisplayedElemContainer}>
+              {location.pathname === '/home' ? (
+                <TransactionsList transactions={transactions} />
+              ) : (
+                <Outlet />
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
+
+export default DashboardPage;

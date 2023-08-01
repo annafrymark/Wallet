@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import css from './ModalAddTransaction.module.css';
 import { ReactComponent as Plus } from '../../utils/images/plus.svg';
 import { ReactComponent as Close } from '../../utils/images/close.svg';
-import Header from 'components/shared/Header';
 import { Formik, Form, Field } from 'formik';
 import Switch from '@mui/material/Switch';
 import * as Yup from 'yup';
@@ -215,9 +214,7 @@ const Modal = () => {
             <span className={css.closebutton} onClick={handleCloseModal}>
               <Close />
             </span>
-            <span className={css.headernone}>
-              <Header />
-            </span>
+
             <div className={css.formContainer}>
               <h2 className={css.title}>Add transction</h2>
               <span className={css.switchButton}>

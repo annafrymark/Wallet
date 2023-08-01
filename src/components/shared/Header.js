@@ -5,8 +5,7 @@ import ModalLogout from 'components/ModalLogout/ModalLogout';
 import { ReactComponent as Wallet } from '../../utils/images/wallet.svg';
 import { ReactComponent as Exit } from '../../utils/images/exit.svg';
 
-
-const Header = () => {
+export const Header = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleLogout = () => {
@@ -41,4 +40,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+// export default Header;
