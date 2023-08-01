@@ -56,7 +56,7 @@ const LoginForm = () => {
     >
       {({ values, handleBlur, isValid, touched, dirty, errors }) => (
         <div className={css.Container}>
-          <Form className={css.Form} onSubmit={event => handleSubmit(event)}>
+          <Form className={css.Form} onSubmit={handleSubmit}>
             <div className={css.LogoContainer}>
               <img className={css.Logo} alt="Logo" src={logo} />
               <h1 className={css.Title}>Wallet</h1>

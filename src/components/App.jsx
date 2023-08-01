@@ -1,4 +1,3 @@
-
 // import useAuth from "hooks/useAuth";
 import React, { lazy } from 'react';
 import { useDispatch } from 'react-redux';
@@ -6,38 +5,75 @@ import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/authOperations';
 import { RestrictedRoute } from './Routes/RestrictedRoute';
+import { PrivateRoute } from './Routes/PrivateRoute';
 import { Suspense } from 'react';
 import { Loader } from './Loader/Loader';
-import { DashboardPage } from '../pages/DashboardPage/DashboardPage';
+
 import { CurrencyTable } from './Currencies/Currencies';
 // import { Balance } from './Balance/Balance';
 import { Diagram } from './DashBoard/Statistics/Diagram';
-import Header from './shared/Header';
+
 import Modal from './ModallAddTransaction/ModalAddTransaction';
+import { useAuth } from 'hooks/useAuth';
+
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 
 const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
 );
-
-// import useAuth from "hooks/useAuth";
+const Header = lazy(() => import('./shared/Header'));
+const DashboardPage = lazy(() =>
+  import('../pages/DashboardPage/DashboardPage')
+);
 
 export const App = () => {
   const dispatch = useDispatch();
-  // const { isRefreshing } = useAuth();
+  const { isRefreshing } = useAuth();
+
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <div>
       <Suspense fallback={<Loader />}>
-      <Modal />
+        {/* <Modal /> */}
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/register" element={<RegistrationPage />} />
-          {/* <Route path="/" element={<Header />} /> */}
-          <Route path="/home" element={<DashboardPage />}>
+          <Route index element={<LoginPage />} />
+          <Route
+            path="/wallet"
+            element={
+              <RestrictedRoute component={<LoginPage />} redirectTo="/home" />
+            }
+          />
+
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute component={<LoginPage />} redirectTo="/home" />
+            }
+          />
+
+          <Route
+            path="/register"
+            element={
+              <PrivateRoute
+                redirectTo="/wallet"
+                component={<RegistrationPage />}
+              />
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute
+                component={<DashboardPage />}
+                redirectTo="/"
+              ></PrivateRoute>
+            }
+          >
             <Route path="diagram" element={<Diagram />} />
             <Route path="currencies" element={<CurrencyTable />} />
           </Route>
