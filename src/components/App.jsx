@@ -1,4 +1,3 @@
-
 // import useAuth from "hooks/useAuth";
 import React, { lazy } from 'react';
 import { useDispatch } from 'react-redux';
@@ -15,7 +14,7 @@ import { CurrencyTable } from './Currencies/Currencies';
 import { Diagram } from './DashBoard/Statistics/Diagram';
 
 import Modal from './ModallAddTransaction/ModalAddTransaction';
-import { useAuth } from "hooks/useAuth";
+import { useAuth } from 'hooks/useAuth';
 
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 
@@ -27,11 +26,10 @@ const DashboardPage = lazy(() =>
   import('../pages/DashboardPage/DashboardPage')
 );
 
-
 export const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
-  
+
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
@@ -43,17 +41,19 @@ export const App = () => {
       <Suspense fallback={<Loader />}>
         {/* <Modal /> */}
         <Routes>
+          <Route index element={<LoginPage />} />
           <Route
-            path="/"
+            path="/wallet"
             element={
-              <RestrictedRoute  component={<LoginPage />} />
+              <RestrictedRoute component={<LoginPage />} redirectTo="/home" />
             }
           />
+
           <Route
             path="/register"
             element={
-              <RestrictedRoute
-                redirectTo="/"
+              <PrivateRoute
+                redirectTo="/wallet"
                 component={<RegistrationPage />}
               />
             }
@@ -61,17 +61,15 @@ export const App = () => {
           <Route
             path="/home"
             element={
-              <PrivateRoute component={<Header/>}>
-                <Route index component= {<DashboardPage />}>
-                <Route path="/diagram" element={<Diagram />} />
-                  {/* <Route path="/currencies" element={<CurrencyTable />} /> */}
-                  </Route>
-              </PrivateRoute>
+              <PrivateRoute
+                component={<DashboardPage />}
+                redirectTo="/"
+              ></PrivateRoute>
             }
-          />
-
-       
-          
+          >
+            <Route path="diagram" element={<Diagram />} />
+            <Route path="currencies" element={<CurrencyTable />} />{' '}
+          </Route>
         </Routes>
       </Suspense>
     </div>
