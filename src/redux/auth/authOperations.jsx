@@ -2,8 +2,9 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
 
+
 // axios.defaults.baseURL = process.env.DB_URI;
-axios.defaults.baseURL = process.env.SERVER_URL;
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 
 const setAuthHeader = token => { 
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;

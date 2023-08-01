@@ -41,26 +41,17 @@ export const App = () => {
       <Suspense fallback={<Loader />}>
         {/* <Modal /> */}
         <Routes>
-          <Route index element={<LoginPage />} />
           <Route
-            path="/wallet"
+            path="/"
             element={
-              <RestrictedRoute component={<LoginPage />} redirectTo="/home" />
+              <RestrictedRoute redirectTo="/home" component={<LoginPage />} />
             }
           />
-
-          <Route
-            path="/login"
-            element={
-              <RestrictedRoute component={<LoginPage />} redirectTo="/home" />
-            }
-          />
-
           <Route
             path="/register"
             element={
-              <PrivateRoute
-                redirectTo="/wallet"
+              <RestrictedRoute
+                redirectTo="/login"
                 component={<RegistrationPage />}
               />
             }
@@ -69,14 +60,14 @@ export const App = () => {
             path="/home"
             element={
               <PrivateRoute
+                // redirectTo="/login"
                 component={<DashboardPage />}
-                redirectTo="/"
-              ></PrivateRoute>
+              >
+                <Route path="diagram" element={<Diagram />} />
+                <Route path="currencies" element={<CurrencyTable />} />
+              </PrivateRoute>
             }
-          >
-            <Route path="diagram" element={<Diagram />} />
-            <Route path="currencies" element={<CurrencyTable />} />
-          </Route>
+          />
         </Routes>
       </Suspense>
     </div>

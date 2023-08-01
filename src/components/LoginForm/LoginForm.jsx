@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
-//import * as Yup from 'yup';
+import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,23 +12,23 @@ import logo from '../../utils/images/wallet-icon.png';
 import css from '../RegistrationForm/registrationForm.module.css';
 import { logIn } from 'redux/auth/authOperations';
 
-// const userSchema = Yup.object({
-//   email: Yup.string()
-//     .email('Invalid e-mail.')
-//     .required('E-mail is required.')
-//     .matches(/^\w+[\w-.]*\w@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/, 'Invalid email.'),
-//   password: Yup.string()
-//     .matches(
-//       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,12}$/,
-//       'Password must contain 6 - 12 characters: one uppercase, one lowercase, one number and one special character.'
-//     )
-//     .required('Password is required.'),
-// });
+const userSchema = Yup.object({
+  email: Yup.string()
+    .email('Invalid e-mail.')
+    .required('E-mail is required.')
+    .matches(/^\w+[\w-.]*\w@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/, 'Invalid email.'),
+  password: Yup.string()
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,12}$/,
+      'Password must contain 6 - 12 characters: one uppercase, one lowercase, one number and one special character.'
+    )
+    .required('Password is required.'),
+});
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // eslint-disable-next-line
-  // const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handlePasswordVisibility = () => {
@@ -51,8 +51,8 @@ const LoginForm = () => {
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
-      // validationSchema={userSchema}
-      // validateOnBlur
+      validationSchema={userSchema}
+      validateOnBlur
     >
       {({ values, handleBlur, isValid, touched, dirty, errors }) => (
         <div className={css.Container}>
