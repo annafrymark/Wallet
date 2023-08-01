@@ -3,6 +3,8 @@ import {
   deleteTransaction,
   fetchTransactions,
   addTransaction,
+  getDetailedStatistics,
+  getTransactionByCategory,
   //editTransaction,
 } from './operations';
 
@@ -36,6 +38,8 @@ const transactionSlice = createSlice({
     balance: 0,
     isLoading: false,
     error: null,
+    statistics: {},
+    total: {},
   },
 
   extraReducers: builder => {
@@ -66,7 +70,31 @@ const transactionSlice = createSlice({
         state.data.push(action.payload);
         // state.items = action.payload;
       })
-      .addCase(addTransaction.rejected, handleRejected);
+      .addCase(addTransaction.rejected, handleRejected)
+      .addCase(getTransactionByCategory.pending, (state, sction) => { 
+        state.isLoading = true;
+      })
+      .addCase(getTransactionByCategory.fulfilled, (state, action) => {
+        state.total = action.payload;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(getTransactionByCategory.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(getDetailedStatistics.pending, (state, action) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getDetailedStatistics.fulfilled,(state, action) => {
+        state.statistics = action.payload;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(getDetailedStatistics.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+ 
 
     // [editTransaction.pending]: handlePending,
     // [editTransaction.fulfilled](state, action) {

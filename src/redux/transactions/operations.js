@@ -47,3 +47,29 @@ export const deleteTransaction = createAsyncThunk(
     }
   }
 );
+
+export const getTransactionByCategory = createAsyncThunk(
+  'transactions/getTransactionByCategory',
+  async (category, thunkAPI) => {
+    try {
+      const res = await axios.get(`/transactions/${category}`);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getDetailedStatistics = createAsyncThunk(
+  'transactions/getDetailedStatistics',
+  async ({ month, year }, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        `/transactions/${month}/${year}`
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
