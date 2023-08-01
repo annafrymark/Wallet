@@ -60,7 +60,7 @@ export const RegisterForm = () => {
     dispatch(register({ email, password, confirmPassword, name }));
     // console.log('cos cos cos');
     console.log(email, password, confirmPassword, name);
-    navigate('/login');
+    navigate('/');
     form.reset();
   };
 
@@ -189,7 +189,7 @@ export const RegisterForm = () => {
                   <VisibilityIcon style={{ color: '#e0e0e0' }} />
                 )}
               </span>
-              <PasswordStrengthBar password={password} />
+              <PasswordStrengthBar password={values.password} />
             </label>
             <label className={css.Field}>
               {touched.name && errors.name ? (
