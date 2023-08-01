@@ -1,3 +1,4 @@
+// import Media from 'react-media';
 import { HomeTab } from '../../components/HomeTab/HomeTab';
 import css from './dashboardPage.module.css';
 import { TransactionsList } from 'components/TransactionsTable/TransactionsTable';
