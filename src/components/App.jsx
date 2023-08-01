@@ -1,3 +1,5 @@
+import Header from './shared/Header';
+import Modal from './ModallAddTransaction/ModalAddTransaction';
 // import useAuth from "hooks/useAuth";
 import React, { lazy } from 'react';
 import { useDispatch } from 'react-redux';
