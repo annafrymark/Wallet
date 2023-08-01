@@ -50,6 +50,13 @@ export const App = () => {
           />
 
           <Route
+            path="/login"
+            element={
+              <RestrictedRoute component={<LoginPage />} redirectTo="/home" />
+            }
+          />
+
+          <Route
             path="/register"
             element={
               <PrivateRoute
@@ -68,7 +75,7 @@ export const App = () => {
             }
           >
             <Route path="diagram" element={<Diagram />} />
-            <Route path="currencies" element={<CurrencyTable />} />{' '}
+            <Route path="currencies" element={<CurrencyTable />} />
           </Route>
         </Routes>
       </Suspense>
