@@ -1,5 +1,4 @@
-import Header from './shared/Header';
-import Modal from './ModallAddTransaction/ModalAddTransaction';
+
 // import useAuth from "hooks/useAuth";
 import React, { lazy } from 'react';
 import { useDispatch } from 'react-redux';
@@ -14,6 +13,7 @@ import { CurrencyTable } from './Currencies/Currencies';
 // import { Balance } from './Balance/Balance';
 import { Diagram } from './DashBoard/Statistics/Diagram';
 import Header from './shared/Header';
+import Modal from './ModallAddTransaction/ModalAddTransaction';
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 
 const RegistrationPage = lazy(() =>
@@ -21,7 +21,7 @@ const RegistrationPage = lazy(() =>
 );
 
 // import useAuth from "hooks/useAuth";
-import Modal from './ModallAddTransaction/ModalAddTransaction';
+
 export const App = () => {
   const dispatch = useDispatch();
   // const { isRefreshing } = useAuth();
