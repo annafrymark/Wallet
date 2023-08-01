@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   deleteTransaction,
   fetchTransactions,
-  //addTransaction,
+  addTransaction,
   //editTransaction,
 } from './operations';
 
@@ -38,33 +38,35 @@ const transactionSlice = createSlice({
     error: null,
   },
 
-  extraReducers: {
-    [fetchTransactions.pending]: handlePending,
-    [fetchTransactions.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.items = action.payload;
-      state.balance = calculateBalance(action.payload);
-    },
-    [fetchTransactions.rejected]: handleRejected,
+  extraReducers: builder => {
+    builder
+      .addCase(fetchTransactions.pending, handlePending)
+      .addCase(fetchTransactions.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = action.payload;
+        state.balance = calculateBalance(action.payload);
+      })
+      .addCase(fetchTransactions.rejected, handleRejected)
+      .addCase(deleteTransaction.pending, handlePending)
+      .addCase(deleteTransaction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const index = state.items.findIndex(
+          transaction => transaction.id === action.payload.id
+        );
+        state.items.splice(index, 1);
+      })
+      .addCase(deleteTransaction.rejected, handleRejected)
+      .addCase(addTransaction.pending, handlePending)
+      .addCase(addTransaction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.data.push(action.payload);
+        // state.items = action.payload;
+      })
+      .addCase(addTransaction.rejected, handleRejected);
 
-    [deleteTransaction.pending]: handlePending,
-    [deleteTransaction.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      const index = state.items.findIndex(
-        transaction => transaction.id === action.payload.id
-      );
-      state.items.splice(index, 1);
-    },
-    [deleteTransaction.rejected]: handleRejected,
-    // [addTransaction.pending]: handlePending,
-    // [addTransaction.fulfilled](state, action) {
-    //   state.isLoading = false;
-    //   state.error = null;
-    //   state.items.push(action.payload);
-    // },
-    // [addTransaction.rejected]: handleRejected,
     // [editTransaction.pending]: handlePending,
     // [editTransaction.fulfilled](state, action) {
     //   state.isLoading = false;

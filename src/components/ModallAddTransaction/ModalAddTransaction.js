@@ -7,7 +7,7 @@ import { Formik, Form, Field } from 'formik';
 import Switch from '@mui/material/Switch';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { addTransaction } from 'redux/transaction/transactionOperations';
+import { addTransaction } from 'redux/transactions/operations';
 import 'react-datetime/css/react-datetime.css';
 import DateTime from 'react-datetime';
 // import SwitchButton from './switchButton';
