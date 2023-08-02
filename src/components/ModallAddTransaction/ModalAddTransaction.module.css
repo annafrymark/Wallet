@@ -125,14 +125,8 @@
   display: flex;
   justify-content: center;
   line-height: 1.5;
-  color: #000;
-  text-align: center;
-  font-family: Poppins;
   font-size: 30px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  margin-top: -3px;
+  margin-top: 0px;
 }
 .switchButton {
   display: flex;
@@ -175,6 +169,6 @@
 @media (min-width: 1280px) {
   .modalcontent {
     width: 35%;
-    height: 83%;
+    height: 72%;
   }
 }

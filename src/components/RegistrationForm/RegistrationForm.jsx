@@ -32,7 +32,7 @@ const userSchema = Yup.object({
 });
 
 export const RegisterForm = () => {
-  const dispatch = useDispatch(); // eslint-disable-next-line
+  const dispatch = useDispatch();// eslint-disable-next-line
   const navigate = useNavigate(); // eslint-disable-next-line
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);

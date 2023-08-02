@@ -40,8 +40,6 @@ export const editTransaction = createAsyncThunk(
     try {
       const response = await axios.put(
         `transactions/${editedTransaction.id}`,
-        `http://localhost:4000/api/transactions/${editedTransaction.id}`,
-
         editedTransaction
       );
       return response.data;

@@ -1,4 +1,3 @@
-
 // import useAuth from "hooks/useAuth";
 import React, { lazy } from 'react';
 import { useDispatch } from 'react-redux';
@@ -9,8 +8,12 @@ import { RestrictedRoute } from './Routes/RestrictedRoute';
 import { PrivateRoute } from './Routes/PrivateRoute';
 import { Suspense } from 'react';
 import { Loader } from './Loader/Loader';
+
 import { CurrencyTable } from './Currencies/Currencies';
+
 import { Diagram } from './DashBoard/Statistics/Diagram';
+
+import Modal from './ModallAddTransaction/ModalAddTransaction';
 import { useAuth } from 'hooks/useAuth';
 
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));

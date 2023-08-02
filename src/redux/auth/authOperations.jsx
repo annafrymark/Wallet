@@ -96,12 +96,12 @@ const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
         return user;
 
     } catch (error) { 
-        Notiflix.Notify.failure(`${error.message}`, {
-            position: 'center-top',
-            closeButton: false,
-            timeout: 2000,
-            width: '350px',
-        });
+        // Notiflix.Notify.failure(`${error.message}`, {
+        //     position: 'center-top',
+        //     closeButton: false,
+        //     timeout: 2000,
+        //     width: '350px',
+        // });
 
         return thunkAPI.rejectWithValue(error.message);
     }

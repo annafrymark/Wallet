@@ -8,7 +8,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, Outlet } from 'react-router-dom';
 import { Header } from '../../components/shared/Header';
-import Modal from 'components/ModallAddTransaction/ModalAddTransaction';
 
 const DashboardPage = () => {
   const dispatch = useDispatch();
@@ -29,7 +28,6 @@ const DashboardPage = () => {
             <div className={css.HomeTabContainer}>
               <HomeTab />
             </div>
-            <Modal />
             <div className={css.DisplayedElemContainer}>
               {location.pathname === '/home' ? (
                 <TransactionsList transactions={transactions} />
