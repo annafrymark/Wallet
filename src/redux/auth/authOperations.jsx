@@ -20,7 +20,7 @@ const register = createAsyncThunk('auth/register', async (credentials, thunkAPI)
         console.log(credentials);
         const response = await axios.post('/users/register', credentials);
         setAuthHeader(response.data.token);
-        Notiflix.Notify.success('Registration successful. Please check your email to verify your account.', {
+        Notiflix.Notify.success('Registration successful.', {
             position: 'center-top',
             closeButton: false,
             timeout: 2000,
@@ -91,7 +91,7 @@ const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
         const response = await axios.get(`/users/current`);
         const user = response.data;
         if (!user) { 
-            return thunkAPI.rejectWithValue('Unable to authentocate.');
+            return thunkAPI.rejectWithValue('Unable to authenticate.');
         }
 
         return user;
