@@ -15,13 +15,15 @@ import { Diagram } from './DashBoard/Statistics/Diagram';
 
 import Modal from './ModallAddTransaction/ModalAddTransaction';
 import { useAuth } from 'hooks/useAuth';
+import { Transaction } from './Transaction/Transaction';
+import SampleComponent from './EditModalTrasaction/SampleComponent';
 
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 
 const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
 );
-const Header = lazy(() => import('./shared/Header'));
+// const Header = lazy(() => import('./shared/Header'));
 const DashboardPage = lazy(() =>
   import('../pages/DashboardPage/DashboardPage')
 );
@@ -42,34 +44,39 @@ export const App = () => {
         {/* <Modal /> */}
         <Routes>
           <Route index element={<LoginPage />} />
-          <Route
-            path="/"
-            element={
-              <RestrictedRoute component={<LoginPage />} redirectTo="/home" />
-            }
-          />
 
-          <Route
-            path="/register"
-            element={
-              <RestrictedRoute
-                redirectTo="/"
-                component={<RegistrationPage />}
-              />
-            }
-          />
-          <Route
-            path="/home"
-            element={
-              <PrivateRoute
-                component={<DashboardPage />}
-                redirectTo="/"
-              ></PrivateRoute>
-            }
-          >
-            <Route path="diagram" element={<Diagram />} />
-            <Route path="currencies" element={<CurrencyTable />} />
-          </Route>
+          <Modal />
+          <SampleComponent />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <RestrictedRoute component={<LoginPage />} redirectTo="/home" />
+              }
+            />
+
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute
+                  redirectTo="/"
+                  component={<RegistrationPage />}
+                />
+              }
+            />
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute
+                  component={<DashboardPage />}
+                  redirectTo="/"
+                ></PrivateRoute>
+              }
+            >
+              <Route path="diagram" element={<Diagram />} />
+              <Route path="currencies" element={<CurrencyTable />} />
+            </Route>
+          </Routes>
         </Routes>
       </Suspense>
     </div>
