@@ -3,7 +3,7 @@ import css from './Header.module.css';
 
 import ModalLogout from 'components/ModalLogout/ModalLogout';
 import { ReactComponent as Wallet } from '../../utils/images/wallet.svg';
-import { ReactComponent as Exit } from '../../utils/images/exit.svg';
+// import { ReactComponent as Exit } from '../../utils/images/exit.svg';
 
 export const Header = () => {
   const [showModal, setShowModal] = useState(false);

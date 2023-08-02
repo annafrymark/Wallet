@@ -1,44 +1,44 @@
 import React, { useState } from 'react';
-import css from './ModalAddTransaction.module.css';
-import { ReactComponent as Plus } from '../../utils/images/plus.svg';
+import css from './EditModalTransaction.module.css';
 import { ReactComponent as Close } from '../../utils/images/close.svg';
+import { ReactComponent as Plus } from '../../utils/images/plus.svg';
 // import Header from 'components/shared/Header';
 import { Formik, Form, Field } from 'formik';
-import Switch from '@mui/material/Switch';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { addTransaction } from '../../redux/transactions/operations';
+import { editTransaction } from 'redux/transactions/operations';
 import 'react-datetime/css/react-datetime.css';
 import DateTime from 'react-datetime';
 
-function FormIncome({ onCancel }) {
+const validationSchema = Yup.object().shape({
+  price: Yup.number().required('Price is required'),
+  date: Yup.date().required('Date is required'),
+  category: Yup.string().required('Category is required'),
+});
+
+function FormIncome({ onCancel, initialValues, handleCloseModal }) {
   const dispatch = useDispatch();
 
-  const validationSchema = Yup.object().shape({
-    price: Yup.number().required('Price is required'),
-    date: Yup.date().required('Date is required'),
-  });
-
-  const handleSubmit = (values, { resetForm }) => {
-    console.log('FormIncome handleSubmit:', values);
+  const handleSubmit = values => {
     const { price, date, comment } = values;
 
-    const newTransaction = {
+    const editedTransaction = {
+      ...initialValues,
       price,
       date,
       comment,
     };
 
-    dispatch(addTransaction(newTransaction));
-    resetForm();
+    dispatch(editTransaction(editedTransaction));
+    handleCloseModal();
   };
 
   return (
     <Formik
       initialValues={{
-        price: '',
-        date: new Date(),
-        comment: '',
+        price: initialValues.price || '',
+        date: initialValues.date || new Date().toISOString().substr(0, 10),
+        comment: initialValues.comment || '',
       }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
@@ -52,7 +52,6 @@ function FormIncome({ onCancel }) {
             name="price"
             required
           />
-
           <DateTime
             value={values.date}
             dateFormat="YYYY-MM-DD"
@@ -70,7 +69,6 @@ function FormIncome({ onCancel }) {
               },
             }}
           />
-
           <Field
             className={css.inputFormComment}
             placeholder="Comment"
@@ -78,9 +76,8 @@ function FormIncome({ onCancel }) {
             name="comment"
             rows="4"
           />
-
           <button className={css.buttonADD} type="submit">
-            ADD
+            SAVE
           </button>
           <button className={css.buttonCancel} type="button" onClick={onCancel}>
             CANCEL
@@ -91,37 +88,31 @@ function FormIncome({ onCancel }) {
   );
 }
 
-function FormExpense({ onCancel }) {
+function FormExpense({ onCancel, initialValues, handleCloseModal }) {
   const dispatch = useDispatch();
 
-  const validationSchema = Yup.object().shape({
-    price: Yup.number().required('Price is required'),
-    date: Yup.date().required('Date is required'),
-    category: Yup.string().required('Category is requred'),
-  });
-
-  const handleSubmit = (values, { resetForm }) => {
-    console.log('FormIncome handleSubmit:', values);
+  const handleSubmit = values => {
     const { category, price, date, comment } = values;
 
-    const newTransaction = {
+    const editedTransaction = {
+      ...initialValues,
       category,
       price,
       date,
       comment,
     };
 
-    dispatch(addTransaction(newTransaction));
-    resetForm();
+    dispatch(editTransaction(editedTransaction));
+    handleCloseModal();
   };
 
   return (
     <Formik
       initialValues={{
-        category: '',
-        price: '',
-        date: new Date(),
-        comment: '',
+        category: initialValues.category || '',
+        price: initialValues.price || '',
+        date: initialValues.date || new Date(),
+        comment: initialValues.comment || '',
       }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
@@ -174,7 +165,7 @@ function FormExpense({ onCancel }) {
           />
 
           <button className={css.buttonADD} type="submit">
-            ADD
+            SAVE
           </button>
           <button className={css.buttonCancel} type="button" onClick={onCancel}>
             CANCEL
@@ -185,7 +176,7 @@ function FormExpense({ onCancel }) {
   );
 }
 
-const Modal = () => {
+const EditModal = ({ transaction }) => {
   const [showModal, setShowModal] = useState(false);
   const [showIncomeForm, setShowIncomeForm] = useState(true);
 
@@ -195,15 +186,23 @@ const Modal = () => {
 
   const handleOpenModal = () => {
     setShowModal(true);
-    setShowIncomeForm(true);
+    setShowIncomeForm(transaction.type === 'income'); // Ustaw rodzaj formularza na podstawie typu transakcji
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  const handleIncomeClick = () => {
+    setShowIncomeForm(true);
+  };
+  const handleExpenseClick = () => {
+    setShowIncomeForm(false);
+  };
+
   return (
     <div>
-      <button className={css.addButton} type="button" onClick={handleOpenModal}>
+      <button type="button" onClick={handleOpenModal}>
         <Plus />
       </button>
 
@@ -213,41 +212,41 @@ const Modal = () => {
             <span className={css.closebutton} onClick={handleCloseModal}>
               <Close />
             </span>
-            {/* <span className={css.headernone}>
-              <Header />
-            </span> */}
             <div className={css.formContainer}>
-              <h2 className={css.title}>Add transction</h2>
-              <span className={css.switchButton}>
-                <p
-                  style={{
-                    color: !showIncomeForm ? '#24CCA7' : '',
-                  }}
-                  className="switchText"
+              <h2 className={css.title}>Edit transaction</h2>
+              <div className={css.switchButton}>
+                <button
+                  className={
+                    showIncomeForm ? css.activeButtonIncome : css.inactiveButton
+                  }
+                  onClick={handleIncomeClick}
                 >
                   Income
-                </p>
-                <Switch
-                  defaultChecked
-                  checked={showIncomeForm}
-                  className={css.switchEdit}
-                  onClick={toggleForm}
-                >
-                  {showIncomeForm ? 'Income' : 'Expense'}
-                </Switch>
-                <p
-                  style={{
-                    color: showIncomeForm ? '#FF6596' : '',
-                  }}
-                  className="switchText"
+                </button>
+                <p className={css.padding}>/</p>
+                <button
+                  className={
+                    !showIncomeForm
+                      ? css.activeButtonExpense
+                      : css.inactiveButton
+                  }
+                  onClick={handleExpenseClick}
                 >
                   Expense
-                </p>
-              </span>
+                </button>
+              </div>
               {showIncomeForm ? (
-                <FormExpense onCancel={handleCloseModal} />
+                <FormIncome
+                  onCancel={handleCloseModal}
+                  initialValues={transaction}
+                  handleCloseModal={handleCloseModal}
+                />
               ) : (
-                <FormIncome onCancel={handleCloseModal} />
+                <FormExpense
+                  onCancel={handleCloseModal}
+                  initialValues={transaction}
+                  handleCloseModal={handleCloseModal}
+                />
               )}
             </div>
           </div>
@@ -257,4 +256,4 @@ const Modal = () => {
   );
 };
 
-export default Modal;
+export default EditModal;
