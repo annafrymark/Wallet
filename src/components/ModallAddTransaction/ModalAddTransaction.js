@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import css from './ModalAddTransaction.module.css';
-import { ReactComponent as Plus } from '../images/plus.svg';
-import { ReactComponent as Close } from '../images/close.svg';
-import Header from 'components/shared/Header';
+import { ReactComponent as Plus } from '../../utils/images/plus.svg';
+import { ReactComponent as Close } from '../../utils/images/close.svg';
+// import Header from 'components/shared/Header';
 import { Formik, Form, Field } from 'formik';
 import Switch from '@mui/material/Switch';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { addTransaction } from 'redux/transaction/transactionOperations';
+import { addTransaction } from '../../redux/transactions/operations';
 import 'react-datetime/css/react-datetime.css';
 import DateTime from 'react-datetime';
 
@@ -213,9 +213,9 @@ const Modal = () => {
             <span className={css.closebutton} onClick={handleCloseModal}>
               <Close />
             </span>
-            <span className={css.headernone}>
+            {/* <span className={css.headernone}>
               <Header />
-            </span>
+            </span> */}
             <div className={css.formContainer}>
               <h2 className={css.title}>Add transction</h2>
               <span className={css.switchButton}>
