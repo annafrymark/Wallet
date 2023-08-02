@@ -176,7 +176,7 @@ function FormExpense({ onCancel, initialValues, handleCloseModal }) {
   );
 }
 
-const EditModal = ({ transaction }) => {
+ export const EditModal = ({ transaction }) => {
   const [showModal, setShowModal] = useState(false);
   const [showIncomeForm, setShowIncomeForm] = useState(true);
 
@@ -256,4 +256,4 @@ const EditModal = ({ transaction }) => {
   );
 };
 
-export default EditModal;
+// export default EditModal;

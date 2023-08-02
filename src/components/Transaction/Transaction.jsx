@@ -2,11 +2,11 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import css from './transaction.module.css';
 import { useDispatch } from 'react-redux';
 import { deleteTransaction } from '../../redux/transactions/operations';
-import { EditModal } from '../../components/EditModalTrasaction';
+import { EditModal } from '../EditModalTrasaction/EditModalTransaction';
 
 export const Transaction = ({ transaction }) => {
   const handleEdit = () => {
-    <EditModal transaction={transaction} />;
+    EditModal(transaction);
   };
 
   const dispatch = useDispatch();
