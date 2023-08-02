@@ -13,9 +13,8 @@ import { CurrencyTable } from './Currencies/Currencies';
 
 import { Diagram } from './DashBoard/Statistics/Diagram';
 
-import Modal from './ModallAddTransaction/ModalAddTransaction';
 import { useAuth } from 'hooks/useAuth';
-import { Transaction } from './Transaction/Transaction';
+
 import SampleComponent from './EditModalTrasaction/SampleComponent';
 
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
@@ -42,41 +41,28 @@ export const App = () => {
     <div>
       <Suspense fallback={<Loader />}>
         {/* <Modal /> */}
+
         <Routes>
-          <Route index element={<LoginPage />} />
-
-          <Modal />
-          <SampleComponent />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <RestrictedRoute component={<LoginPage />} redirectTo="/home" />
-              }
-            />
-
-            <Route
-              path="/register"
-              element={
-                <RestrictedRoute
-                  redirectTo="/"
-                  component={<RegistrationPage />}
-                />
-              }
-            />
-            <Route
-              path="/home"
-              element={
-                <PrivateRoute
-                  component={<DashboardPage />}
-                  redirectTo="/"
-                ></PrivateRoute>
-              }
-            >
-              <Route path="diagram" element={<Diagram />} />
-              <Route path="currencies" element={<CurrencyTable />} />
-            </Route>
-          </Routes>
+          <Route
+            path="/"
+            element={<RestrictedRoute component={<LoginPage />} />}
+          />
+          <Route
+            path="/register"
+            element={<RestrictedRoute component={<RegistrationPage />} />}
+          />
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute
+                // redirectTo="/login"
+                component={<DashboardPage />}
+              >
+                <Route path="diagram" element={<Diagram />} />
+                <Route path="currencies" element={<CurrencyTable />} />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </Suspense>
     </div>

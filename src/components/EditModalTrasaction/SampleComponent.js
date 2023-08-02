@@ -1,5 +1,5 @@
 import React from 'react';
-import EditModal from './EditModalTransaction';
+import { EditModal } from './EditModalTransaction';
 
 const SampleComponent = () => {
   const sampleTransaction = {
