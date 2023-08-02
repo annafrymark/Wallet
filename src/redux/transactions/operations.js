@@ -5,7 +5,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 //axios.defaults.baseURL = 'http://localhost:3000/wallet';
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 
-
 function sortTransactionsByDate(transactions) {
   return transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
@@ -35,8 +34,20 @@ export const addTransaction = createAsyncThunk(
     }
   }
 );
-
-
+export const editTransaction = createAsyncThunk(
+  'transactions/editTransaction',
+  async (editedTransaction, thunkAPI) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/api/transactions/${editedTransaction.id}`,
+        editedTransaction
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 
 export const deleteTransaction = createAsyncThunk(
   'transactions/deleteTransaction',
@@ -66,9 +77,7 @@ export const getDetailedStatistics = createAsyncThunk(
   'transactions/getDetailedStatistics',
   async ({ month, year }, thunkAPI) => {
     try {
-      const response = await axios.get(
-        `/transactions/${month}/${year}`
-      );
+      const response = await axios.get(`/transactions/${month}/${year}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
