@@ -32,7 +32,7 @@ const userSchema = Yup.object({
 });
 
 export const RegisterForm = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();// eslint-disable-next-line
   const navigate = useNavigate(); // eslint-disable-next-line
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -40,12 +40,10 @@ export const RegisterForm = () => {
 
   const handlePasswordVisibility = () => {
     setShowPassword(!showPassword);
-    console.log('setshow');
   };
 
   const handleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
-    console.log('setconfirm');
   };
 
   const handleSubmit = event => {
@@ -55,12 +53,11 @@ export const RegisterForm = () => {
     const email = form.elements.email.value;
     const password = form.elements.password.value;
     const confirmPassword = form.elements.confirmPassword.value;
-    const name = form.elements.name.value;
+    const firstName = form.elements.name.value;
 
-    dispatch(register({ email, password, confirmPassword, name }));
-    // console.log('cos cos cos');
-    console.log(email, password, confirmPassword, name);
-    navigate('/');
+    dispatch(register({ email, password, confirmPassword, firstName }));
+    console.log(email, password, confirmPassword, firstName);
+    // navigate('/');
     form.reset();
   };
 
@@ -189,7 +186,7 @@ export const RegisterForm = () => {
                   <VisibilityIcon style={{ color: '#e0e0e0' }} />
                 )}
               </span>
-              <PasswordStrengthBar password={values.password} />
+              <PasswordStrengthBar password={password} />
             </label>
             <label className={css.Field}>
               {touched.name && errors.name ? (
