@@ -188,6 +188,8 @@ const EditModal = ({ transaction }) => {
   const handleOpenModal = () => {
     setShowModal(true);
     setShowIncomeForm(transaction.type === 'income');
+
+    setShowIncomeForm(transaction.type === 'income');
   };
 
   const handleCloseModal = () => {
