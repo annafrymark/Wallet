@@ -14,13 +14,16 @@ import { Diagram } from './DashBoard/Statistics/Diagram';
 
 import Modal from './ModallAddTransaction/ModalAddTransaction';
 import { useAuth } from 'hooks/useAuth';
+import EditModal from './EditModalTrasaction/EditModalTransaction';
+import { Transaction } from './Transaction/Transaction';
+import SampleComponent from './EditModalTrasaction/SampleComponent';
 
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 
 const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
 );
-const Header = lazy(() => import('./shared/Header'));
+// const Header = lazy(() => import('./shared/Header'));
 const DashboardPage = lazy(() =>
   import('../pages/DashboardPage/DashboardPage')
 );
@@ -38,8 +41,9 @@ export const App = () => {
   ) : (
     <div>
       <Suspense fallback={<Loader />}>
-        {/* <Modal /> */}
-        <Routes>
+        <Modal />
+        <SampleComponent />
+        {/* <Routes>
           <Route
             path="/"
             element={<RestrictedRoute component={<LoginPage />} />}
@@ -60,7 +64,7 @@ export const App = () => {
               </PrivateRoute>
             }
           />
-        </Routes>
+        </Routes> */}
       </Suspense>
     </div>
   );

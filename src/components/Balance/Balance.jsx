@@ -1,5 +1,5 @@
 import css from './balance.module.css';
-import { UseSelector, useSelector } from 'react-redux/es/hooks/useSelector';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { getBalance } from '../../redux/transactions/selectors';
 export const Balance = () => {
   const balance = useSelector(getBalance);

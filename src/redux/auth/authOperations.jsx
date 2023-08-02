@@ -2,7 +2,6 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
 
-
 // axios.defaults.baseURL = process.env.DB_URI;
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 
