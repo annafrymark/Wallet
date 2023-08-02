@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import css from './EditModalTransaction.module.css';
 import { ReactComponent as Close } from '../../utils/images/close.svg';
 import { ReactComponent as Plus } from '../../utils/images/plus.svg';
-// import Header from 'components/shared/Header';
+import Header from 'components/shared/Header';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
@@ -129,32 +129,33 @@ function FormExpense({ onCancel, initialValues, handleCloseModal }) {
             <option value="Education">Education</option>
             <option value="Leisure">Leisure</option>
           </Field>
-
-          <Field
-            className={css.inputForm}
-            placeholder="0.00"
-            type="number"
-            name="price"
-            required
-          />
-
-          <DateTime
-            value={values.date}
-            dateFormat="YYYY-MM-DD"
-            timeFormat={false}
-            inputProps={{
-              required: true,
-              style: {
-                border: 'none',
-                borderBottom: `1px solid #e0e0e0`,
-                width: '90%',
-                marginTop: '20px',
-                fontSize: '15px',
-                padding: '18px',
-                outline: 'none',
-              },
-            }}
-          />
+          <span className={css.test}>
+            <Field
+              className={css.inputForm}
+              placeholder="0.00"
+              type="number"
+              name="price"
+              required
+            />
+            <DateTime
+              className="test"
+              value={values.date}
+              dateFormat="YYYY-MM-DD"
+              timeFormat={false}
+              inputProps={{
+                required: true,
+                style: {
+                  border: 'none',
+                  borderBottom: `1px solid #e0e0e0`,
+                  width: '90%',
+                  marginTop: '20px',
+                  fontSize: '15px',
+                  padding: '18px',
+                  outline: 'none',
+                },
+              }}
+            />
+          </span>
 
           <Field
             className={css.inputFormComment}
@@ -186,7 +187,7 @@ const EditModal = ({ transaction }) => {
 
   const handleOpenModal = () => {
     setShowModal(true);
-    setShowIncomeForm(transaction.type === 'income'); // Ustaw rodzaj formularza na podstawie typu transakcji
+    setShowIncomeForm(transaction.type === 'income');
   };
 
   const handleCloseModal = () => {
@@ -211,6 +212,9 @@ const EditModal = ({ transaction }) => {
           <div className={css.modalcontent}>
             <span className={css.closebutton} onClick={handleCloseModal}>
               <Close />
+            </span>
+            <span className={css.headernone}>
+              <Header />
             </span>
             <div className={css.formContainer}>
               <h2 className={css.title}>Edit transaction</h2>
