@@ -90,7 +90,7 @@ const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
         const response = await axios.get(`/users/current`);
         const user = response.data;
         if (!user) { 
-            return thunkAPI.rejectWithValue('Unable to authentocate.');
+            return thunkAPI.rejectWithValue('Unable to authenticate.');
         }
 
         return user;

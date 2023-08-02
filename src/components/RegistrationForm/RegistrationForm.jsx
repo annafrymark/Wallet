@@ -32,6 +32,8 @@ const userSchema = Yup.object({
 });
 
 export const RegisterForm = () => {
+
+
   const dispatch = useDispatch();// eslint-disable-next-line
   const navigate = useNavigate(); // eslint-disable-next-line
   const [password, setPassword] = useState('');
@@ -186,7 +188,7 @@ export const RegisterForm = () => {
                   <VisibilityIcon style={{ color: '#e0e0e0' }} />
                 )}
               </span>
-              <PasswordStrengthBar password={values.password} />
+              <PasswordStrengthBar password={password} />
             </label>
             <label className={css.Field}>
               {touched.name && errors.name ? (
