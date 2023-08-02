@@ -44,7 +44,7 @@ const LoginForm = () => {
 
     dispatch(logIn({ email, password }));
 
-    // navigate('/home');
+    navigate('/home');
     form.reset();
   };
 
