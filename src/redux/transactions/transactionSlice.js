@@ -5,6 +5,7 @@ import {
   addTransaction,
   getDetailedStatistics,
   getTransactionByCategory,
+  editTransaction,
   //editTransaction,
 } from './operations';
 
@@ -71,7 +72,7 @@ const transactionSlice = createSlice({
         // state.items = action.payload;
       })
       .addCase(addTransaction.rejected, handleRejected)
-      .addCase(getTransactionByCategory.pending, (state, sction) => { 
+      .addCase(getTransactionByCategory.pending, (state, sction) => {
         state.isLoading = true;
       })
       .addCase(getTransactionByCategory.fulfilled, (state, action) => {
@@ -86,7 +87,7 @@ const transactionSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getDetailedStatistics.fulfilled,(state, action) => {
+      .addCase(getDetailedStatistics.fulfilled, (state, action) => {
         state.statistics = action.payload;
         state.isLoading = false;
         state.error = null;
@@ -94,7 +95,24 @@ const transactionSlice = createSlice({
       .addCase(getDetailedStatistics.rejected, (state, action) => {
         state.error = action.payload;
       })
- 
+      .addCase(editTransaction.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(editTransaction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const editedTransaction = action.payload;
+        const index = state.transactions.findIndex(
+          transaction => transaction.id === editedTransaction.id
+        );
+        if (index !== -1) {
+          state.transactions[index] = editedTransaction;
+        }
+      })
+      .addCase(editTransaction.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
 
     // [editTransaction.pending]: handlePending,
     // [editTransaction.fulfilled](state, action) {
