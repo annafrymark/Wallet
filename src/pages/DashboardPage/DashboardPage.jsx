@@ -21,9 +21,9 @@ const DashboardPage = () => {
 
   return (
     <>
-      <Header />
       <div className={css.DashboardPageBcg}>
         <div className={css.test}>
+          <Header />
           <div className={css.DashboardPage}>
             <div className={css.HomeTabContainer}>
               <HomeTab />
