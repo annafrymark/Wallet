@@ -14,6 +14,8 @@ export const CurrencyTable = () => {
     const fetchCurrencies = async () => {
       try {
         const response = await axios.get(
+          //powyżej nowy api key
+          // 'https://api.currencyapi.com/v3/latest?apikey=cur_live_7X5QiqjBdf0qKdmcU8SUm9SoOyGQahyAog8ryp3B'
           'https://api.currencyapi.com/v3/latest?apikey=cur_live_uXxuu8XbnBZWLK3C9wx21MDeS9fitr8Wy3pKfp9w'
         );
         const currenciesData = response.data.data;
