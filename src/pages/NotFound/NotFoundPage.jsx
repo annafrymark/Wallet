@@ -1,6 +1,6 @@
 import React from "react";
 import Media from "react-media";
-import picture from '../../utils/images/frame-cashappPNF404.png';
+import picture from '../../utils/images/Frame-cashappPNF404.png';
 import css from './NotFoundPage.module.css';
 
 export const NotFound = () => { 
