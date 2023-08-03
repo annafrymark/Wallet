@@ -1,302 +1,95 @@
-@import '../../utils/css-variables.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/circe');
 
-* {
-    margin: 0;
-    padding: 0;
-}
+@media screen and (min-width: 768px) {
+    .Container {
+        background-image:
+            url(../../utils/images/ellipse-violet.png),
+            url(../../utils/images/ellipse-peach.png);
 
-.container {
-    background-color: var(--color-bg-secondary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100dvw;
-    height: 100dvh;
-}
+        background-repeat: no-repeat, no-repeat;
+        background-position: bottom left, top right;
+        background-color: #e7eaf2;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
 
-.peach,
-.violet,
-.man,
-.name {
-    display: none;
-}
-
-.form-container {
-    background-color: var(--color-bg-secondary);
-    padding: 6.6875rem 1.25rem;
-    width: 20rem;
-    height: 35.5rem;
-}
-
-.title-container {
-    height: 1.875rem;
-    width: 7.5rem;
-    margin: auto auto 3.75rem auto;
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-}
-
-.icon {
-    width: 1.875rem;
-    height: 1.875rem;
-}
-
-.text {
-    width: 4.6188rem;
-    height: 1.0519rem;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.email,
-.password {
-    border: none;
-    border-bottom: 0.0625rem solid var(--color-Gray2);
-    outline: none;
-    height: 2rem;
-    width: 17.5rem;
-    margin-bottom: 2.5rem;
-    padding-left: 2.8125rem;
-    background-color: var(--color-bg-secondary);
-    color: var(--color-text-primary);
-}
-
-.email::placeholder,
-.password::placeholder {
-    color: var(--color-Gray2);
-}
-
-.email-icon,
-.password-icon {
-    content: '';
-    position: absolute;
-    left: 0.3125rem;
-    top: 0.125rem;
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-.email-icon svg,
-.password-icon svg {
-    fill: var(--color-Gray2);
-    transition-property: fill;
-    transition-duration: 500ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hide-password-icon svg {
-    content: '';
-    position: absolute;
-    right: 0.3125rem;
-    top: 0.125rem;
-    width: 1.5rem;
-    height: 1.5rem;
-    cursor: pointer;
-    fill: var(--color-Gray2);
-}
-
-.email-container,
-.password-container {
-    position: relative;
-}
-
-.email-container:focus-within svg,
-.password-container:focus-within .password-icon svg {
-    transition-property: fill;
-    transition-duration: 500ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    fill: var(--color-green);
-}
-
-.btn {
-    margin-bottom: 1.25rem;
-    width: 17.5rem;
-    height: 3.125rem;
-    border-radius: 1.25rem;
-    background-color: var(--color-green);
-    border: none;
-    color: var(--color-bg-secondary);
-    font-family: var(--font-secondary);
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: 1.6875rem;
-    text-align: center;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    display: inline-block;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0%;
-    height: 100%;
-    background-color: var(--color-bg-add-btn-hover);
-    transition: all 0.3s;
-    border-radius: 1.25rem;
-    z-index: -1;
-}
-
-.btn:hover {
-    color: #fff;
-}
-
-.btn:hover::before {
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    .container {
-        background-color: var(--color-bg-primary);
-        overflow: hidden;
-        padding: 0;
     }
 
-    .name {
-        display: block;
-        position: absolute;
-        width: 11.6875rem;
-        height: 2.8125rem;
-        transform-origin: center;
-        transform: translateX(65%);
-        top: 10.4375rem;
-        font-family: var(--font-primary);
-        font-style: normal;
+    .LogoContainer {
+        width: 533px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        margin-top: 60px;
+    }
+
+    .Image {
+        margin-bottom: 32px;
+        margin-right: 40px;
+        width: 260px;
+        height: 250px;
+    }
+
+    .Title {
+        font-family: 'Poppins';
         font-weight: 400;
-        font-size: 1.875rem;
-        line-height: 2.8125rem;
+        font-size: 30px;
+        line-height: 1.5;
+    }
+
+    .FormContainer {
+        width: 100%;
+        align-content: center;
+        padding: 52px 91px 52px 107px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .Container {
         display: flex;
         align-items: center;
-        text-align: center;
-        color: #000000;
-    }
-
-    .peach {
-        display: block;
-        position: absolute;
-        width: 38.625rem;
-        height: 34.1875rem;
-        left: 45%;
-        top: -7.5rem;
-        transform: rotate(21.94deg);
-    }
-
-    .violet {
-        display: block;
-        position: absolute;
-        width: 38.625rem;
-        height: 46.6875rem;
-        left: -9.5831rem;
-        top: 39.6875rem;
-    }
-
-    .man {
-        display: block;
-        position: absolute;
-        width: 16.2662rem;
-        height: 15.625rem;
-        transform-origin: center;
-        transform: translateX(-52%);
-        top: 3.75rem;
-    }
-
-    .title-container {
-        margin: 2.5rem auto 3.75rem auto;
-        width: 11.3125rem;
-        height: 2.5rem;
-    }
-
-    .icon {
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-
-    .text {
-        width: 7.5625rem;
-        height: 2.5rem;
-    }
-
-    .btn {
-        width: 18.75rem;
-    }
-
-    .form-container {
-        background-color: var(--color-bg-secondary);
-        position: absolute;
-        width: 33.3125rem;
-        height: 29.25rem;
-        transform-origin: center;
-        transform: translateX(-50%);
-        top: 22.5rem;
-        border-radius: 1.25rem;
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
         padding: 0;
+        overflow: hidden;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
-    .email,
-    .password {
-        width: 25.625rem;
+    .LogoContainer {
+        margin: 0px;
+        flex-direction: column;
+        background-image:
+            url(../../utils/images/ellipse-violet.png);
+        background-repeat: no-repeat, no-repeat;
+        background-position: bottom left, top right;
+        background-color: #e7eaf2;
+        height: 100vh;
+        width: 75vw;
     }
-}
 
-@media (min-width: 1268px) {
-    .container {
+    .Image {
+        height: 420px;
+        width: 435px;
+    }
+
+    .FormContainer {
+        min-height: 100vh;
+        width: 100%;
+        height: 100%;
         display: flex;
-    }
-
-    .blur {
-        position: absolute;
-        background-color: var(--color-blur);
-        backdrop-filter: blur(0.625rem);
-        width: 50dvw;
-        height: 100dvh;
-        transform: translateX(50%);
-    }
-
-    .man {
-        width: 27.2rem;
-        height: 26.2188rem;
-        left: 25%;
-        transform: translateX(-50%);
-        top: 9.375rem;
-    }
-
-    .form-container {
-        position: absolute;
-        z-index: 1;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .name {
-        left: 25%;
-        top: 37.3438rem;
-        transform: translateX(-50%);
-    }
-
-    .peach {
-        left: 59.375rem;
-        top: -6.875rem;
-    }
-
-    .violet {
-        width: 38.625rem;
-        height: 46.6875rem;
-        left: -8.3331rem;
-        top: 27.1875rem;
+        align-items: center;
+        justify-content: center;
+        padding: 52px 91px 52px 107px;
+        background: rgba(255, 255, 255, 0.4);
+        position: relative;
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
     }
 }
