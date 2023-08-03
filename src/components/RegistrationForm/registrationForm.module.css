@@ -1,3 +1,4 @@
+
 .Container {
   display: flex;
   justify-content: center;
@@ -21,10 +22,13 @@
   font-size: 22px;
   line-height: 0.85;
   color: #000000;
+  margin-bottom: 45px;
 }
 
 .Form {
   height: 100vh;
+  margin: 0px auto;
+  width: 100%;
   max-width: 480px;
   overflow: hidden;
   display: flex;
@@ -33,18 +37,13 @@
   justify-content: center;
   align-items: center;
   background-color: rgb(255, 255, 255);
+  overflow: hidden;
+  padding: 40px 58.5px, 92px, 65px;
 }
 
 .Field {
   position: relative;
   margin-bottom: 40px;
-}
-.ErrorMessage {
-  padding: 0;
-  margin: 0;
-  font-size: 10px;
-  width: inherit;
-  color: red;
 }
 
 .InputIcon {
@@ -133,4 +132,31 @@
 .ButtonSecondary:hover {
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+@media screen and (min-width: 768px) {
+  .Form {
+    width: 533px;
+    height: 616px;
+    border-radius: 20px;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .LogoContainer {
+    width: 181px;
+    height: 40px;
+    margin-top: 40px;
+    margin-right: 20px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .Form {
+    width: 533;
+    border-radius: 20px;
+  }
 }

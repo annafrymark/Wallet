@@ -15,7 +15,7 @@ export const Header = () => {
   };
 
   const user = useSelector(selectUser);
-  console.log(user.firstname);
+  console.log(user.firstName);
 
   return (
     <header className={css.header}>
