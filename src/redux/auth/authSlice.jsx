@@ -3,7 +3,7 @@ import { register, logIn, logOut, refreshUser } from './authOperations';
 
 const initialState = {
   user: {
-    username: '',
+    firstname: '',
     email: '',
   },
   token: null,

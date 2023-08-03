@@ -3,8 +3,13 @@ import css from './transaction.module.css';
 import { useDispatch } from 'react-redux';
 import { deleteTransaction } from '../../redux/transactions/operations';
 import { EditModal } from '../../components/EditModalTrasaction/EditModalTransaction';
+import { format } from 'date-fns';
 
 export const Transaction = ({ transaction }) => {
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return format(date, 'dd.MM.yy');
+  }
   const handleEdit = () => {
     <EditModal transaction={transaction} />;
   };
@@ -17,10 +22,10 @@ export const Transaction = ({ transaction }) => {
   return (
     <>
       <td className={css.Date} data-label="Date">
-        <span>{transaction.date}</span>
+        <span>{formatDate(transaction.date)}</span>
       </td>
       <td className={css.Type} data-label="Type">
-        <span>{transaction.type}</span>
+        {transaction.type === true ? <span>+</span> : <span>-</span>}
       </td>
       <td className={css.Category} data-label="Category">
         <span>{transaction.category}</span>
@@ -32,7 +37,7 @@ export const Transaction = ({ transaction }) => {
         data-label="Sum"
         className={transaction.category === 'Income' ? css.Income : css.Outcome}
       >
-        {transaction.sum}
+        {transaction.sum.toFixed(2)}
       </td>
       <td>
         <button className={css.EditButton} onClick={handleEdit}>
