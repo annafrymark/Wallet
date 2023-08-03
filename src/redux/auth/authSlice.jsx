@@ -3,7 +3,7 @@ import { register, logIn, logOut, refreshUser } from './authOperations';
 
 const initialState = {
   user: {
-    firstname: '',
+    firstName: '',
     email: '',
   },
   token: null,
@@ -33,7 +33,7 @@ const authSlice = createSlice({
         state.isAuth = true;
       })
       .addCase(logOut.fulfilled, state => {
-        state.user = { name: '', email: '' };
+        state.user = { firstName: '', email: '' };
         state.token = null;
         state.isLoggedIn = false;
         state.isRefreshing = false;
