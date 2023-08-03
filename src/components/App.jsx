@@ -29,21 +29,21 @@ const NotFound = lazy(() => import('../pages/NotFound/NotFoundPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  // const { isRefreshing } = useAuth();
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  // return isRefreshing ? (
-  //   <b>Refreshing user...</b>
-  // ) : (
-  return(
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+  // return(
     <div>
       <Suspense fallback={<Loader />}>
         {/* <Modal /> */}
         <Routes>
-          {/* <Route index element={<LoginPage />} /> */}
+          <Route index element={<LoginPage />} />
           <Route
             path="/"
             element={
