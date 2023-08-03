@@ -6,7 +6,7 @@ export const Balance = () => {
   return (
     <div className={css.BalanceContainer}>
       <p className={css.BalanceTitle}>YOUR BALANCE</p>
-      <p className={css.BalanceValue}>$ {balance}</p>
+      <p className={css.BalanceValue}>$ {balance.toFixed(2)}</p>
     </div>
   );
 };

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import css from './Header.module.css';
 
-import ModalLogout from 'components/ModalLogout/ModalLogout';
+import ModalLogout from '../ModalLogout/ModalLogout';
 import { ReactComponent as Wallet } from '../../utils/images/wallet.svg';
 // import { ReactComponent as Exit } from '../../utils/images/exit.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from '../../redux/auth/authSelectors';
 
 export const Header = () => {
   const [showModal, setShowModal] = useState(false);
@@ -11,6 +13,9 @@ export const Header = () => {
   const handleLogout = () => {
     setShowModal(true);
   };
+
+  const user = useSelector(selectUser);
+  console.log(user.firstname);
 
   return (
     <header className={css.header}>
@@ -22,7 +27,7 @@ export const Header = () => {
       </h1>
       <div className={css.buttonContainer}>
         <button type="button" className={css.button}>
-          Tutaj imie zalogowanego użytkownika
+          {user.firstName}
         </button>
         <p className={css.border}>|</p>
         <div className={css.buttonExitContainer}>

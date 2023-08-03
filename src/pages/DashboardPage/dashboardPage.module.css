@@ -5,13 +5,15 @@
   background-repeat: no-repeat, no-repeat;
   background-position: bottom left, top right;
   background-color: #e7eaf2;
-  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+
+  font-family: Circe;
 }
 .test {
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(25px);
-  width: 100vw;
-  height: 100vh;
 }
 
 .DisplayedElemContainer {
@@ -20,18 +22,19 @@
 
 @media (min-width: 768px) {
   .DashboardPageBcg {
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    height: 100vh;
-    width: 100vw;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 }
 
 @media (min-width: 1028px) {
+  .DashboardPageBcg {
+    overflow: hidden;
+  }
+  .test {
+    height: 100%;
+  }
   .DashboardPage {
     max-width: 1280px;
     display: flex;
@@ -49,7 +52,9 @@
   }
 
   .DisplayedElemContainer {
+    max-height: 60vh;
     padding: 46px 16px 46px 69px;
     flex-basis: 63%;
+    overflow-y: auto;
   }
 }

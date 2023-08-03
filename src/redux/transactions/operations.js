@@ -15,6 +15,7 @@ export const fetchTransactions = createAsyncThunk(
     try {
       const response = await axios.get('/transactions');
       const transactions = response.data.data.transactions;
+      console.log(transactions);
       const sortedTransactions = sortTransactionsByDate(transactions);
       return sortedTransactions;
     } catch (e) {
